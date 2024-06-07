@@ -1,4 +1,4 @@
-From 4548fb7bd2baddbc6e869837fd0e9d924e846d98 Mon Sep 17 00:00:00 2001
+From dee022cf161b49ea30d6ea46ed0c23e9f13671dc Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 6 Oct 2023 19:11:22 -0400
 Subject: [PATCH 3/4] Include vndk v28 sepolicy support
@@ -21,3 +21,4 @@ index d0d7e6e4cf..750d5fb4cd 100644
      31.0 \
 -- 
 2.34.1
+
