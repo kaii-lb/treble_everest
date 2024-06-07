@@ -1,4 +1,4 @@
-From 50005d05fdebfc6504f0c6493f57179f4abf3419 Mon Sep 17 00:00:00 2001
+From ef1c279c270e72e1d90bad76d2f1570f3f4759f2 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 13 Apr 2020 21:01:16 +0200
 Subject: [PATCH 08/24] There are three SCO devices. Fallback from one to the
@@ -43,3 +43,4 @@ index cb45f5438b..ffefd5fa32 100644
  
 -- 
 2.34.1
+

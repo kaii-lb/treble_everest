@@ -3,8 +3,8 @@ $(call inherit-product, vendor/everest/config/BoardConfigEverest.mk)
 $(call inherit-product, device/everest/sepolicy/common/sepolicy.mk)
 -include vendor/everest/build/core/config.mk
 
-# Bootanimation (force 720p - 720x1280)
-TARGET_BOOT_ANIMATION_RES := 1280
+# Bootanimation (force 1080p - 1920)
+TARGET_BOOT_ANIMATION_RES := 1920
 
 # Kernel
 TARGET_NO_KERNEL_IMAGE := true
