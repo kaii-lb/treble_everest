@@ -2,7 +2,8 @@
 
 set -e
 
-patches=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+# patches=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+patches=$(realpath treblestuff/patches)
 tree="$2"
 
 echo "Applying ${tree} patches:"
