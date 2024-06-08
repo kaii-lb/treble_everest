@@ -11,7 +11,7 @@ then ro.product.device/ro.product.manufacturer is read from vendor
  1 file changed, 85 insertions(+), 2 deletions(-)
 
 diff --git a/libc/system_properties/system_properties.cpp b/libc/system_properties/system_properties.cpp
-index 9dd5e35ce..886bef127 100644
+index 701a31d..20ad5f6 100644
 --- a/libc/system_properties/system_properties.cpp
 +++ b/libc/system_properties/system_properties.cpp
 @@ -36,6 +36,8 @@
@@ -23,7 +23,7 @@ index 9dd5e35ce..886bef127 100644
  
  #include <new>
  
-@@ -53,6 +55,85 @@
+@@ -54,6 +56,87 @@
  #define SERIAL_VALUE_LEN(serial) ((serial) >> 24)
  #define APPCOMPAT_PREFIX "ro.appcompat_override."
  
@@ -97,7 +97,7 @@ index 9dd5e35ce..886bef127 100644
 +      return "ro.keymaster.xxx.security_patch";
 +    }
 +    if(strcmp(name, "ro.boot.vbmeta.device_state") == 0) {
-+      return "ro.keymaster.xxx.vbmeta_state";
++     return "ro.keymaster.xxx.vbmeta_state";
 +    }
 +    if(strcmp(name, "ro.boot.verifiedbootstate") == 0) {
 +      return "ro.keymaster.xxx.verifiedbootstate";
@@ -106,10 +106,12 @@ index 9dd5e35ce..886bef127 100644
 +  return name;
 +}
 +
++
++
  static bool is_dir(const char* pathname) {
    struct stat info;
    if (stat(pathname, &info) == -1) {
-@@ -156,17 +237,19 @@ uint32_t SystemProperties::AreaSerial() {
+@@ -159,19 +242,21 @@ uint32_t SystemProperties::AreaSerial() {
  }
  
  const prop_info* SystemProperties::Find(const char* name) {
@@ -119,10 +121,13 @@ index 9dd5e35ce..886bef127 100644
      return nullptr;
    }
  
+   pi_hooks.OnFind(&name);
+ 
 -  prop_area* pa = contexts_->GetPropAreaForName(name);
 +  prop_area* pa = contexts_->GetPropAreaForName(newName);
    if (!pa) {
-     async_safe_format_log(ANDROID_LOG_WARN, "libc", "Access denied finding property \"%s\"", name);
+-    async_safe_format_log(ANDROID_LOG_WARN, "libc", "Access denied finding property \"%s\"", name);
++    async_safe_format_log(ANDROID_LOG_WARN, "libc", "Access denied finding property \"%s\"", newName);
      return nullptr;
    }
  
@@ -131,6 +136,6 @@ index 9dd5e35ce..886bef127 100644
  }
  
  static bool is_appcompat_override(const char* name) {
--- 
+ 
 2.34.1
 
