@@ -3,7 +3,7 @@ $(call inherit-product, vendor/everest/config/BoardConfigEverest.mk)
 $(call inherit-product, device/everest/sepolicy/common/sepolicy.mk)
 -include vendor/everest/build/core/config.mk
 
-# Bootanimation (force 1080p - 1920)
+# Bootanimation (force 1080p - 1080x1920)
 TARGET_BOOT_ANIMATION_RES := 1920
 
 # Kernel
@@ -16,9 +16,9 @@ PRODUCT_PACKAGE_OVERLAYS += \
 
 # Packages
 PRODUCT_PACKAGES += \
-  AuroraStorePrivilegedExtension \
-  F-DroidPrivilegedExtension \
-  OpenEUICC
+  # AuroraStorePrivilegedExtension \
+  # F-DroidPrivilegedExtension \
+  # OpenEUICC
 
 # SELinux
 SELINUX_IGNORE_NEVERALLOWS := true
