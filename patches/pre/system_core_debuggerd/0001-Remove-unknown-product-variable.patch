@@ -1,0 +1,17 @@
+diff --git a/system/core/debuggerd/Android.bp b/system/core/debuggerd/Android.bp
+index f56b79e..62f5d64 100644
+--- a/system/core/debuggerd/Android.bp
++++ b/system/core/debuggerd/Android.bp
+@@ -302,12 +302,6 @@ cc_library_static {
+     product_variables: {
+         debuggable: {
+             cflags: ["-DROOT_POSSIBLE"],
+        },
+-		malloc_use_scudo: {
+-            cflags: ["-DUSE_SCUDO"],
+-            whole_static_libs: ["libscudo"],
+-            srcs: ["libdebuggerd/scudo.cpp"],
+-            header_libs: ["scudo_headers"],
+-        },
+     },
+ }
