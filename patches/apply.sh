@@ -15,6 +15,7 @@ for project in $(cd "$patches"/"$tree"; echo *); do
     [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay
     [ "$p" == vendor/partner/gms ] && p=vendor/partner_gms
     pushd "$p" &>/dev/null
+    git am --abort
     for patch in "$patches"/"$tree"/"$project"/*.patch; do
         git apply "$patch" -v || exit
     done

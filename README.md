@@ -26,6 +26,10 @@ Replace `<arch>` with `arm64` or `arm32_binder64` and `<variant>` with `vanilla`
 If you face any conflicts while applying patches, apply the patch manually.
 For any other issues, report them via the [Issues](https://github.com/cawilliamson/treble_voltage/issues) tab.
 
+# What patches don't work
+- platform_bionic 0002
+- platform_build doesn't seem to be a git repo
+
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
 - [VoltageOS Team](https://github.com/VoltageOS)
