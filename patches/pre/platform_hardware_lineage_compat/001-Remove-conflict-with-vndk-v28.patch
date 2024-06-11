@@ -1,7 +1,7 @@
-diff --git a/hardware/lineage/compat/Android.bp b/hardware/lineage/compat/Android.bp
+diff --git a/Android.bp b/Android.bp
 index 28889b4..2e08551 100644
---- a/hardware/lineage/compat/Android.bp
-+++ b/hardware/lineage/compat/Android.bp
+--- a/Android.bp
++++ b/Android.bp
 @@ -451,41 +451,3 @@ cc_library_shared {
      compile_multilib: "64",
      vendor: true,

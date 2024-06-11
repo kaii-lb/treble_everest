@@ -1,7 +1,7 @@
-diff --git a/system/core/debuggerd/Android.bp b/system/core/debuggerd/Android.bp
+diff --git a/Android.bp b/Android.bp
 index f56b79e..62f5d64 100644
---- a/system/core/debuggerd/Android.bp
-+++ b/system/core/debuggerd/Android.bp
+--- a/Android.bp
++++ b/Android.bp
 @@ -302,12 +302,6 @@ cc_library_static {
      product_variables: {
          debuggable: {
