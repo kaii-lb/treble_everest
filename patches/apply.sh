@@ -16,7 +16,7 @@ for project in $(cd "$patches"/"$tree"; echo *); do
     [ "$p" == vendor/partner/gms ] && p=vendor/partner_gms
     pushd "$p" &>/dev/null
     for patch in "$patches"/"$tree"/"$project"/*.patch; do
-        git apply "$patch" || exit
+        git apply "$patch" -v || exit
     done
     popd &>/dev/null
 done
