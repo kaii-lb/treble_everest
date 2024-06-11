@@ -26,6 +26,22 @@ Replace `<arch>` with `arm64` or `arm32_binder64` and `<variant>` with `vanilla`
 If you face any conflicts while applying patches, apply the patch manually.
 For any other issues, report them via the [Issues](https://github.com/cawilliamson/treble_voltage/issues) tab.
 
+# What patches don't work
+### empty string means look for more issues
+
+- platform_bionic 0002
+- platform_bootable_recovery 0001
+- platform_build doesn't seem to be a git repo
+- platform_frameworks_av 
+- platform_frameworks_base 
+- platform_frameworks_opt_net_ims 
+- platform_frameworks_opt_telephony
+- platform_packages_modules_Bluetooth
+- platform_packages_modules_Connectivity
+- platform_system_bpf
+- platform_system_core
+- pre/platform_packages_modules_Bluetooth 0001 0002
+
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
 - [VoltageOS Team](https://github.com/VoltageOS)
