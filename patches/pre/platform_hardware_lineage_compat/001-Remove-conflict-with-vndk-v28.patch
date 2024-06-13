@@ -4,7 +4,7 @@ Date: Tues, 11 Jun 2024 19:58:26 +0000
 Subject: [PATCH 1/1] Revert "remove conflict with other android.bp"
 
 ---
- a/Android.bp | 37 -------------------------------------
+ Android.bp | 37 -------------------------------------
  1 file changed, 37 deletions(-)
 
 diff --git a/Android.bp b/Android.bp

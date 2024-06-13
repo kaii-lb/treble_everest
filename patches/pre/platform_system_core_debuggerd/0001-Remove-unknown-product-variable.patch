@@ -1,3 +1,13 @@
+From 086e3ebc8ab512af67437d2676cfe304c0208951 Mon Sep 17 00:00:00 2001
+From: "kaiilb" <strawberry>
+Date: Thu, 14 Mar 2024 19:58:26 +0000
+Subject: [PATCH 1/1] Revert "Remove malloc scudo"
+
+---
+ Android.bp | 6 ------
+ 1 file changed, 6 deletions(-)
+
+
 diff --git a/Android.bp b/Android.bp
 index f56b79e..62f5d64 100644
 --- a/Android.bp
