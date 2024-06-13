@@ -3,7 +3,10 @@ From: "Christopher A. Williamson" <home@chrisaw.com>
 Date: Mon, 6 May 2024 11:20:26 +0100
 Subject: [PATCH] Disable adb auth for debugging purposes Or as PHH calls it - the "fuck it" method! :)
 
-Change-Id: Iccc152056a0cc72f3015764eba104c3effd20034
+---
+ daemom/main.cpp| 10 ---------- 1 +
+ 1 file changed, 10 deletions(-) 1 insertions(+)
+
 
 diff --git a/daemon/main.cpp b/daemon/main.cpp
 index e2ead88..61f8135 100644
