@@ -17,7 +17,7 @@ for project in $(cd "$patches"/"$tree"; echo *); do
     pushd "$p" &>/dev/null
     git am --abort
     for patch in "$patches"/"$tree"/"$project"/*.patch; do
-        git apply "$patch" -v || exit
+        git am "$patch" -3 || exit
     done
     popd &>/dev/null
 done
