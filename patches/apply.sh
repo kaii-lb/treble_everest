@@ -18,7 +18,7 @@ for project in $(cd "$patches"/"$tree"; echo *); do
     # git am --abort
     # rm -rf .git/rebase-apply
     for patch in "$patches"/"$tree"/"$project"/*.patch; do
-        git am "$patch" || exit
+        git am "$patch" -3 || exit
     done
     popd &>/dev/null
 done
