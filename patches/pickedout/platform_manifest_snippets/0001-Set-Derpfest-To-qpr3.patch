@@ -1,0 +1,13 @@
+diff --git a/derp.xml b/derp.xml
+index 7352fa2..08f16f3 100644
+--- a/derp.xml
++++ b/derp.xml
+@@ -9,7 +9,7 @@
+ 
+   <remote  name="derp"
+            fetch="https://github.com/DerpFest-AOSP"
+-           revision="13" />
++           revision="14-qpr3" />
+ 
+   <remote  name="derp-12"
+            fetch="https://github.com/DerpFest-12"
