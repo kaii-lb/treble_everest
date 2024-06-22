@@ -15,7 +15,7 @@ for project in $(cd $patches/patches/$tree; echo *); do
     [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay    
     pushd $p &>/dev/null
     for patch in $patches/patches/$tree/$project/*.patch; do
-        git am $patch -3 || exit
+        git am $patch -3 && echo "succeeded" || exit
     done
     popd &>/dev/null
 done
