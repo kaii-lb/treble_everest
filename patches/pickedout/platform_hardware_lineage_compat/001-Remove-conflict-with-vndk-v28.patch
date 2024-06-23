@@ -11,10 +11,10 @@ diff --git a/Android.bp b/Android.bp
 index 28889b4..2e08551 100644
 --- a/Android.bp
 +++ b/Android.bp
-@@ -451,41 +451,3 @@ cc_library_shared {
-     compile_multilib: "64",
-     vendor: true,
- }
+# @@ -451,41 +451,3 @@ cc_library_shared {
+#      compile_multilib: "64",
+#      vendor: true,
+#  }
 -
 -cc_prebuilt_library_shared {
 -    name: "libprotobuf-cpp-full-vendorcompat",
