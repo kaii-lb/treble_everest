@@ -16,7 +16,7 @@ for project in $(cd $patches/patches/$tree; echo *); do
     echo directory is $p
     pushd $p &>/dev/null
     for patch in $patches/patches/$tree/$project/*.patch; do
-        git am $patch -3 || echo "PATCH ${tree} FAILED"
+        git am $patch -3 || echo "PATCH ${project} FAILED"
     done
     popd &>/dev/null
 done
