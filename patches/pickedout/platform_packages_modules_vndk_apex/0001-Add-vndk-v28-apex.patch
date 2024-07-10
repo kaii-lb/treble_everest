@@ -7,15 +7,14 @@ Subject: [PATCH 1/1] add vndk v28 apex
  Android.bp | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/Android.bp b/Android.bp
-index b962828..4ccf12f 100644
---- a/Android.bp
-+++ b/Android.bp
-@@ -88,3 +88,10 @@ apex_vndk {
-     vndk_version: "29",
+diff --git a/apex/Android.bp b/apex/Android.bp
+index 4ccf12f..3e20230 100644
+--- a/apex/Android.bp
++++ b/apex/Android.bp
+@@ -89,9 +89,3 @@ apex_vndk {
      system_ext_specific: true,
  }
-+
+ 
 +apex_vndk {
 +    name: "com.android.vndk.v28",
 +    defaults: ["vndk-apex-defaults"],
