@@ -1,20 +1,20 @@
 From 086e3ebc8ab512af67437d2676cfe304c0208951 Mon Sep 17 00:00:00 2001
 From: "kaii_lb" <strawberry>
 Date: Tues, 11 Jun 2024 19:58:26 +0000
-Subject: [PATCH 1/1] Revert "remove conflict with other android.bp"
+Subject: [PATCH 1/1] remove conflict with other android.bp
 
 ---
  Android.bp | 37 -------------------------------------
  1 file changed, 37 deletions(-)
 
 diff --git a/Android.bp b/Android.bp
-index 28889b4..2e08551 100644
+index 75375be..e8a409b 100644
 --- a/Android.bp
 +++ b/Android.bp
-# @@ -451,41 +451,3 @@ cc_library_shared {
-#      compile_multilib: "64",
-#      vendor: true,
-#  }
+@@ -452,41 +452,3 @@ cc_library_shared {
+     compile_multilib: "64",
+     vendor: true,
+ }
 -
 -cc_prebuilt_library_shared {
 -    name: "libprotobuf-cpp-full-vendorcompat",
