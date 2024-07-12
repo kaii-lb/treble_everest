@@ -12,6 +12,7 @@ index 4d6f1ff..073c841 100644
 --- a/Android.bp
 +++ b/Android.bp
 @@ -89,4 +89,10 @@ apex_vndk {
+     vndk_version: "29",
      system_ext_specific: true,
  }
  
