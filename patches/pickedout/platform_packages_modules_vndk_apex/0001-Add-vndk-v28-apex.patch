@@ -7,11 +7,11 @@ Subject: [PATCH 1/1] add vndk v28 apex
  Android.bp | 8 ++++++++
  1 file changed, 8 insertions(+)
 
-diff --git a/apex/Android.bp b/apex/Android.bp
+diff --git a/Android.bp b/Android.bp
 index 4d6f1ff..073c841 100644
---- a/apex/Android.bp
-+++ b/apex/Android.bp
-@@ -89,4 +89,9 @@ apex_vndk {
+--- a/Android.bp
++++ b/Android.bp
+@@ -89,4 +89,10 @@ apex_vndk {
      system_ext_specific: true,
  }
  
