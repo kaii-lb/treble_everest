@@ -16,7 +16,12 @@ for project in $(cd $patches/patches/$tree; echo *); do
     echo directory is $p
     pushd $p &>/dev/null
     for patch in $patches/patches/$tree/$project/*.patch; do
-        git am $patch && echo "PATCH ${project} SUCCEEDED" || echo "PATCH ${project} FAILED"
+        if git am $patch; then
+       	   echo "PATCH ${project} SUCCEEDED!"
+       	else
+       	   echo "PATCH ${project} FAILED, skipping..."
+       	   git am --skip
+     	fi
     done
     popd &>/dev/null
 done
