@@ -1,11 +1,11 @@
-From 086e3ebc8ab512af67437d2676cfe304c0208951 Mon Sep 17 00:00:00 2001
-From: "kaii_lb" <strawberry>
-Date: Tues, 11 Jun 2024 19:58:26 +0000
-Subject: [PATCH 1/1] remove conflict with other android.bp
+From 0d9f77813aa99a187e703108c309bdd6eede7b78 Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Fri, 12 Jul 2024 19:15:18 +0000
+Subject: [PATCH] remove conflicting protobuf library
 
 ---
- Android.bp | 37 -------------------------------------
- 1 file changed, 37 deletions(-)
+ Android.bp | 38 --------------------------------------
+ 1 file changed, 38 deletions(-)
 
 diff --git a/Android.bp b/Android.bp
 index 75375be..e8a409b 100644
@@ -53,3 +53,5 @@ index 75375be..e8a409b 100644
 -    compile_multilib: "both",
 -    check_elf_files: false,
 -}
+-- 
+2.45.1
