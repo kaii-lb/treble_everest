@@ -1,6 +1,6 @@
 $(call inherit-product, vendor/everest/config/common_full_phone.mk)
 $(call inherit-product, vendor/everest/config/BoardConfigEverest.mk)
-$(call inherit-product, device/everest/sepolicy/common/sepolicy.mk)
+# $(call inherit-product, device/everest/sepolicy/common/sepolicy.mk)
 -include vendor/everest/build/core/config.mk
 
 # Bootanimation (force 1080p - 1080x1920)
