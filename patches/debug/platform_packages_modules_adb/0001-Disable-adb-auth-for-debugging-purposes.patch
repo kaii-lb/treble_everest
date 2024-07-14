@@ -1,18 +1,17 @@
-From dd5c99d83973e42e7e08a360ddb14ef9124cb98b Mon Sep 17 00:00:00 2001
-From: "Christopher A. Williamson" <home@chrisaw.com>
-Date: Mon, 6 May 2024 11:20:26 +0100
-Subject: [PATCH] Disable adb auth for debugging purposes Or as PHH calls it - the "fuck it" method! :)
+From c22e8e815be4e962c647ac3deaf8b4c2f366705a Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Tue, 16 Jul 2024 12:03:11 +0000
+Subject: [PATCH] disable authentication for debugging purposes
 
 ---
- daemom/main.cpp| 10 ---------- 1 +
- 1 file changed, 10 deletions(-) 1 insertions(+)
-
+ daemon/main.cpp | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
 diff --git a/daemon/main.cpp b/daemon/main.cpp
-index e2ead88..61f8135 100644
+index e2ead883..2ea91359 100644
 --- a/daemon/main.cpp
 +++ b/daemon/main.cpp
-@@ -198,16 +198,7 @@ int adbd_main(int server_port) {
+@@ -198,16 +198,8 @@ int adbd_main(int server_port) {
      // descriptor will always be open.
      adbd_cloexec_auth_socket();
  
@@ -26,8 +25,10 @@ index e2ead88..61f8135 100644
 -#endif
 -    }
 -#endif
++    // for debugging purposes, disable authentication for ADB. remove from user builds
 +    auth_required = false;
  
      // Our external storage path may be different than apps, since
      // we aren't able to bind mount after dropping root.
-2.44.0
+-- 
+2.45.1
