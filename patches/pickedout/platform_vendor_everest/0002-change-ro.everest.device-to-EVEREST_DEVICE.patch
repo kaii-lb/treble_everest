@@ -1,7 +1,8 @@
 From 4b12fe19197d43a962d38a1b8350426716be95f6 Mon Sep 17 00:00:00 2001
 From: kaii-lb <aosp@crave.io>
 Date: Sun, 14 Jul 2024 09:44:26 +0000
-Subject: [PATCH] change ro.everest.device to EVEREST_DEVICE to match buildinfo.sh
+Subject: [PATCH] change ro.everest.device to EVEREST_DEVICE to match
+ buildinfo.sh
 
 ---
  config/version.mk | 2 +-

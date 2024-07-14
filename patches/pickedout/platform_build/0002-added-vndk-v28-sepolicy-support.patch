@@ -1,0 +1,23 @@
+From fbb30addfcd6d54c4119656103b158a2a3c3c4ff Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Sun, 14 Jul 2024 10:24:43 +0000
+Subject: [PATCH 2/3] added vndk v28 sepolicy support
+
+---
+ core/config.mk | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/core/config.mk b/core/config.mk
+index fc2358f81a..0dda42ba1b 100644
+--- a/core/config.mk
++++ b/core/config.mk
+@@ -884,6 +884,7 @@ BOARD_SEPOLICY_VERS := $(PLATFORM_SEPOLICY_VERSION)
+ 
+ # A list of SEPolicy versions, besides PLATFORM_SEPOLICY_VERSION, that the framework supports.
+ PLATFORM_SEPOLICY_COMPAT_VERSIONS := $(filter-out $(PLATFORM_SEPOLICY_VERSION), \
++    28.0 \
+     29.0 \
+     30.0 \
+     31.0 \
+-- 
+2.45.1
