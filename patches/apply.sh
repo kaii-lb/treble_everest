@@ -20,10 +20,11 @@ if [[ $tree == *"pickedout/"* ]]; then
 
 	for patch in $patches/patches/$tree/*.patch; do
         if git am $patch; then
-       	   echo "PATCH ${project} SUCCEEDED!"
+       	   echo "PATCH ${patch} SUCCEEDED!"
        	else
-       	   echo "PATCH ${project} FAILED, skipping..."
-       	   git am --skip
+       	   echo "PATCH ${patch} FAILED, stopping..."
+       	   #git am --skip
+       	   exit 1
      	fi
     done
     popd &>/dev/null
