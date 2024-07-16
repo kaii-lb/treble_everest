@@ -9,7 +9,7 @@ Subject: [PATCH 09/10] More bpf errors ignore -- there are some 4.14 without
  1 file changed, 3 insertions(+), 6 deletions(-)
 
 diff --git a/netbpfload/NetBpfLoad.cpp b/netbpfload/NetBpfLoad.cpp
-index 9b71eaaa35..0484577a49 100644
+index 8e57a35d3a..0d2cbe1599 100644
 --- a/netbpfload/NetBpfLoad.cpp
 +++ b/netbpfload/NetBpfLoad.cpp
 @@ -345,8 +345,7 @@ int main(int argc, char** argv, char * const envp[]) {
@@ -40,5 +40,5 @@ index 9b71eaaa35..0484577a49 100644
  
      // Create all the pin subdirectories
 -- 
-2.34.1
+2.45.1
 
