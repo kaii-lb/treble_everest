@@ -5,22 +5,22 @@ Subject: [PATCH 6/8] Add properties to disable some features/commands/states
  that the ble chip declared but doesnt actually support
 
 ---
- system/gd/hci/controller.cc | 72 ++++++++++++++++++++++++++++++++++---
- 1 file changed, 68 insertions(+), 4 deletions(-)
+ system/gd/hci/controller.cc | 73 +++++++++++++++++++++++++++++++++++--
+ 1 file changed, 69 insertions(+), 4 deletions(-)
 
 diff --git a/system/gd/hci/controller.cc b/system/gd/hci/controller.cc
-index a6c16a9061..237dbe6b93 100644
+index edf907adec..f50183cfb2 100644
 --- a/system/gd/hci/controller.cc
 +++ b/system/gd/hci/controller.cc
-@@ -18,6 +18,7 @@
- 
+@@ -19,6 +19,7 @@
+ #include <android-base/strings.h>
  #include <android_bluetooth_flags.h>
  
 +#include <base/strings/string_split.h>
  #include <future>
  #include <memory>
  #include <string>
-@@ -33,6 +34,7 @@
+@@ -34,6 +35,7 @@
  #include "os/metrics.h"
  #include "os/system_properties.h"
  #include "sysprops/sysprops_module.h"
@@ -28,12 +28,12 @@ index a6c16a9061..237dbe6b93 100644
  
  namespace bluetooth {
  namespace hci {
-@@ -313,7 +315,23 @@ struct Controller::impl {
+@@ -323,7 +325,23 @@ struct Controller::impl {
      ASSERT(complete_view.IsValid());
      ErrorCode status = complete_view.GetStatus();
      ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
 -    local_supported_commands_ = complete_view.GetSupportedCommands();
-+    //local_supported_commands_ = complete_view.GetSupportedCommands();
++    // local_supported_commands_ = complete_view.GetSupportedCommands();
 +
 +    auto local_commands = complete_view.GetSupportedCommands();
 +    std::string ignored_commands = GetSystemProperty("persist.sys.bt.unsupported.commands").value_or("");
@@ -50,16 +50,16 @@ index a6c16a9061..237dbe6b93 100644
 +    }
 +
 +    local_supported_commands_ = local_commands;
-   }
  
-   void read_local_extended_features_complete_handler(std::promise<void> promise, CommandCompleteView view) {
-@@ -322,7 +340,25 @@ struct Controller::impl {
+     if (auto disabledCommands = os::GetSystemProperty(kPropertyDisabledCommands)) {
+       for (const auto& command : android::base::Split(*disabledCommands, ",")) {
+@@ -341,7 +359,26 @@ struct Controller::impl {
      ErrorCode status = complete_view.GetStatus();
      ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
      uint8_t page_number = complete_view.GetPageNumber();
 -    extended_lmp_features_array_.push_back(complete_view.GetExtendedLmpFeatures());
++    // extended_lmp_features_array_.push_back(complete_view.GetExtendedLmpFeatures());
 +
-+    //extended_lmp_features_array_.push_back(complete_view.GetExtendedLmpFeatures());
 +    auto lmp_features = complete_view.GetExtendedLmpFeatures();
 +
 +    std::string ignored_features = GetSystemProperty("persist.sys.bt.unsupported.ogfeatures").value_or("");
@@ -77,16 +77,17 @@ index a6c16a9061..237dbe6b93 100644
 +    }
 +    extended_lmp_features_array_.push_back(lmp_features);
 +
++
      bluetooth::os::LogMetricBluetoothLocalSupportedFeatures(page_number, complete_view.GetExtendedLmpFeatures());
      // Query all extended features
      if (page_number < complete_view.GetMaximumPageNumber()) {
-@@ -475,7 +511,21 @@ struct Controller::impl {
+@@ -494,7 +531,21 @@ struct Controller::impl {
      ASSERT(complete_view.IsValid());
      ErrorCode status = complete_view.GetStatus();
      ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
 -    le_local_supported_features_ = complete_view.GetLeFeatures();
++    // le_local_supported_features_ = complete_view.GetLeFeatures();
 +
-+    //le_local_supported_features_ = complete_view.GetLeFeatures();
 +    auto local_features = complete_view.GetLeFeatures();
 +    std::string ignored_features = GetSystemProperty("persist.sys.bt.unsupported.lefeatures").value_or("");
 +
@@ -99,16 +100,16 @@ index a6c16a9061..237dbe6b93 100644
 +        }
 +    }
 +
-+    le_local_supported_features_ = local_features;
++    le_local_supported_features_ = local_features;    
    }
  
    void le_read_supported_states_handler(CommandCompleteView view) {
-@@ -483,7 +533,21 @@ struct Controller::impl {
+@@ -502,7 +553,21 @@ struct Controller::impl {
      ASSERT(complete_view.IsValid());
      ErrorCode status = complete_view.GetStatus();
      ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
 -    le_supported_states_ = complete_view.GetLeStates();
-+    //le_supported_states_ = complete_view.GetLeStates();
++    // le_supported_states_ = complete_view.GetLeStates();
 +
 +    auto local_states = complete_view.GetLeStates();
 +    std::string ignored_states = GetSystemProperty("persist.sys.bt.unsupported.states").value_or("");
@@ -122,10 +123,10 @@ index a6c16a9061..237dbe6b93 100644
 +        }
 +    }
 +
-+    le_supported_states_ = local_states;
++    le_supported_states_ = local_states;    
    }
  
    void le_read_accept_list_size_handler(CommandCompleteView view) {
 -- 
-2.34.1
+2.45.1
 
