@@ -8,22 +8,23 @@ patches="${patches}/treblestuff"
 
 echo patchesDir $patches
 
-if [[ $string == *"pickedout/"* ]]; then
-	cutDir=$(echo $tree | cut -d"/" -f2)
-	echo $neededDir
-	cdDir=$(tr _ / <<<$project |sed -e 's;platform/;;g')
+if [[ $tree == *"pickedout/"* ]]; then
+	cutDir="$(echo $tree | cut -d"/" -f2)"
+	echo $cutDir
+	cdDir="$(tr _ / <<<$cutDir |sed -e 's;platform/;;g')"
 	pushd $cdDir &>/dev/null
 	if [[ $? != 0 ]];then
 		echo "cdDir doesn't exist! failing..."
 		exit 1
 	fi
-	
+
 	for patch in $patches/patches/$tree/*.patch; do
         if git am $patch; then
-       	   echo "PATCH ${project} SUCCEEDED!"
+       	   echo "PATCH ${patch} SUCCEEDED!"
        	else
-       	   echo "PATCH ${project} FAILED, skipping..."
+       	   echo "PATCH $(echo $patch | cut -f9 -d"/") FAILED, skipping..."
        	   git am --skip
+#       	   exit 1
      	fi
     done
     popd &>/dev/null
