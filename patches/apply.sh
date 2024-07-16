@@ -17,7 +17,7 @@ if [[ $tree == *"pickedout/"* ]]; then
 		echo "cdDir doesn't exist! failing..."
 		exit 1
 	fi
-	
+
 	for patch in $patches/patches/$tree/*.patch; do
         if git am $patch; then
        	   echo "PATCH ${project} SUCCEEDED!"
