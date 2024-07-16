@@ -22,8 +22,8 @@ if [[ $tree == *"pickedout/"* ]]; then
         if git am $patch; then
        	   echo "PATCH ${patch} SUCCEEDED!"
        	else
-       	   echo "PATCH ${patch} FAILED, stopping..."
-       	   #git am --skip
+       	   echo "PATCH $(echo $patch | cut -f2 -d"/") FAILED, stopping..."
+       	   git am --skip
        	   exit 1
      	fi
     done
