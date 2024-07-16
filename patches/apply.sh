@@ -20,11 +20,11 @@ if [[ $tree == *"/"* ]]; then
 
 	for patch in $patches/patches/$tree/*.patch; do
         if git am $patch; then
-       	   echo "PATCH $(echo $patch | cut -f9 -d"/") SUCCEEDED!"
+       		echo "PATCH $(echo $patch | cut -f9 -d"/") SUCCEEDED!"
        	else
-       	   echo "PATCH $(echo $patch | cut -f9 -d"/") FAILED, skipping..."
-       	   git am --skip
-#       	   exit 1
+       		echo "PATCH $(echo $patch | cut -f9 -d"/") FAILED, skipping..."
+       		git am --skip
+#       	    exit 1
      	fi
     done
     popd &>/dev/null
