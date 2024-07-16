@@ -8,7 +8,7 @@ patches="${patches}/treblestuff"
 
 echo patchesDir $patches
 
-if [[ $tree == *"pickedout/"* ]]; then
+if [[ $tree == *"/"* ]]; then
 	cutDir="$(echo $tree | cut -d"/" -f2)"
 	echo $cutDir
 	cdDir="$(tr _ / <<<$cutDir |sed -e 's;platform/;;g')"
@@ -20,7 +20,7 @@ if [[ $tree == *"pickedout/"* ]]; then
 
 	for patch in $patches/patches/$tree/*.patch; do
         if git am $patch; then
-       	   echo "PATCH ${patch} SUCCEEDED!"
+       	   echo "PATCH $(echo $patch | cut -f9 -d"/") SUCCEEDED!"
        	else
        	   echo "PATCH $(echo $patch | cut -f9 -d"/") FAILED, skipping..."
        	   git am --skip
