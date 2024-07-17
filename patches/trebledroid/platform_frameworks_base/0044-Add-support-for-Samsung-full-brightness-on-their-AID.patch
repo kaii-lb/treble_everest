@@ -13,7 +13,7 @@ diff --git a/services/core/Android.bp b/services/core/Android.bp
 index dd9a435a4082..f01a7a0c1a09 100644
 --- a/services/core/Android.bp
 +++ b/services/core/Android.bp
-@@ -267,6 +267,10 @@ java_library_static {
+@@ -267,6 +267,11 @@ java_library_static {
          "vendor.oplus.hardware.biometrics.fingerprint-V2.1-java",
          "vendor.oppo.hardware.biometrics.fingerprint-V2.1-java",
          "vendor.xiaomi.hardware.fingerprintextension-V1.0-java",        
