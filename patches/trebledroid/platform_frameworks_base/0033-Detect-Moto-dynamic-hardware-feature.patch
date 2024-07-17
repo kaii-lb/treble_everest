@@ -14,10 +14,16 @@ NFC-less variants
  1 file changed, 19 insertions(+)
 
 diff --git a/services/core/java/com/android/server/SystemConfig.java b/services/core/java/com/android/server/SystemConfig.java
-index e1d7be121865..c8dafc5024d7 100644
+index b0ea23355f9b..24133ebfa267 100644
 --- a/services/core/java/com/android/server/SystemConfig.java
 +++ b/services/core/java/com/android/server/SystemConfig.java
-@@ -989,6 +989,25 @@ public class SystemConfig {
+@@ -983,18 +983,37 @@ public class SystemConfig {
+                                         + " at " + parser.getPositionDescription());
+                             } else {
+                                 mUnavailableFeatures.add(fname);
+                             }
+                         } else {
+                             logNotAllowedInPartition(name, permFile, parser);
                          }
                          XmlUtils.skipCurrentTag(parser);
                      } break;
@@ -43,6 +49,12 @@ index e1d7be121865..c8dafc5024d7 100644
                      case "allow-in-power-save-except-idle": {
                          if (allowOverrideAppRestrictions) {
                              String pkgname = parser.getAttributeValue(null, "package");
+                             if (pkgname == null) {
+                                 Slog.w(TAG, "<" + name + "> without package in "
+                                         + permFile + " at " + parser.getPositionDescription());
+                             } else {
+                                 mAllowInPowerSaveExceptIdle.add(pkgname);
+                             }
 -- 
-2.34.1
+2.45.1
 

@@ -10,7 +10,7 @@ Subject: [PATCH 02/10] Support non-working BPF maps on old BPF-less kernel
  .../server/net/NetworkStatsService.java       | 32 +++++++++------
  .../src/com/android/server/BpfNetMaps.java    | 40 ++++++++++++++++++-
  .../native/bpf_headers/include/bpf/BpfMap.h   | 12 +++---
- 6 files changed, 90 insertions(+), 43 deletions(-)
+ 6 files changed, 91 insertions(+), 46 deletions(-)
 
 diff --git a/framework/src/android/net/BpfNetMapsReader.java b/framework/src/android/net/BpfNetMapsReader.java
 index ee422abd9c..480337c322 100644
@@ -377,12 +377,24 @@ index a7fddd08f0..36c615b746 100644
          try {
              final short config = sDataSaverEnabledMap.getValue(DATA_SAVER_ENABLED_KEY).val;
              // Any non-zero value converted from short to boolean is true by convention.
+
 diff --git a/staticlibs/native/bpf_headers/include/bpf/BpfMap.h b/staticlibs/native/bpf_headers/include/bpf/BpfMap.h
-index 1037bebf29..e6c47e52b2 100644
+index 1037bebf29..1375210dc2 100644
 --- a/staticlibs/native/bpf_headers/include/bpf/BpfMap.h
 +++ b/staticlibs/native/bpf_headers/include/bpf/BpfMap.h
-@@ -63,18 +63,18 @@ class BpfMapRO {
-         if (!mMapFd.ok()) abort();
+@@ -58,25 +58,31 @@ class BpfMapRO {
+     // (later on, for testing, we still make available a copy assignment operator)
+     BpfMapRO<Key, Value>(const BpfMapRO<Key, Value>&) = delete;
+ 
+   protected:
+     void abortOnMismatch(bool writable) const {
+-        if (!mMapFd.ok()) abort();
++    	(void) writable
++    }
++
++  public:
++    bool isOk(bool writable = false) const {
++        if (!mMapFd.ok()) return false;
          if (isAtLeastKernelVersion(4, 14, 0)) {
              int flags = bpfGetFdMapFlags(mMapFd);
 -            if (flags < 0) abort();
@@ -394,9 +406,10 @@ index 1037bebf29..e6c47e52b2 100644
 +            if (flags & BPF_F_WRONLY) return false;
 +            if (writable && (flags & BPF_F_RDONLY)) return false;
 +            if (bpfGetFdKeySize(mMapFd) != sizeof(Key)) return false;
-+            if (bpfGetFdValueSize(mMapFd) != sizeof(Value)) return false;            
++            if (bpfGetFdValueSize(mMapFd) != sizeof(Value)) return false;
          }
-+        return true;
++
++        return false
      }
  
    public:
@@ -406,5 +419,7 @@ index 1037bebf29..e6c47e52b2 100644
      }
  
      Result<Key> getFirstKey() const {
+         Key firstKey;
+         if (getFirstMapKey(mMapFd, &firstKey)) {
 -- 
 2.45.1
