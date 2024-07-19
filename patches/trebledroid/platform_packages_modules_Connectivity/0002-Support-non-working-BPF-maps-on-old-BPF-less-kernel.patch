@@ -382,7 +382,15 @@ index 1037bebf29..e6c47e52b2 100644
 --- a/staticlibs/native/bpf_headers/include/bpf/BpfMap.h
 +++ b/staticlibs/native/bpf_headers/include/bpf/BpfMap.h
 @@ -63,18 +63,18 @@ class BpfMapRO {
-         if (!mMapFd.ok()) abort();
+   protected:
+     void abortOnMismatch(bool writable) const {
+-        if (!mMapFd.ok()) abort();
++        (void) writable;
++    }
++
++  public:
++    bool isOk(bool writable = false) const {
++        if (!mMapFd.ok()) return false;
          if (isAtLeastKernelVersion(4, 14, 0)) {
              int flags = bpfGetFdMapFlags(mMapFd);
 -            if (flags < 0) abort();
@@ -399,7 +407,7 @@ index 1037bebf29..e6c47e52b2 100644
 +        return true;
      }
  
-   public:
+-   public:
      explicit BpfMapRO<Key, Value>(const char* pathname) {
          mMapFd.reset(mapRetrieveRO(pathname));
 -        abortOnMismatch(/* writable */ false);
