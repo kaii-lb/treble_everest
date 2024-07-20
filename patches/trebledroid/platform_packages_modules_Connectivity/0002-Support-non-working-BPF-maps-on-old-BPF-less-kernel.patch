@@ -389,7 +389,7 @@ index 1037bebf29..1375210dc2 100644
    protected:
      void abortOnMismatch(bool writable) const {
 -        if (!mMapFd.ok()) abort();
-+    	(void) writable
++    	(void) writable;
 +    }
 +
 +  public:
@@ -409,7 +409,7 @@ index 1037bebf29..1375210dc2 100644
 +            if (bpfGetFdValueSize(mMapFd) != sizeof(Value)) return false;
          }
 +
-+        return false
++        return false;
      }
  
    public:
