@@ -13,15 +13,16 @@ Luckily, Samsung doesn't do anything with those typealias, so we can
 simply ignore them.
 ---
  libsepol/cil/src/cil_binary.c      |  8 ++++++--
- libsepol/cil/src/cil_build_ast.c   | 11 +++++++++--
- libsepol/cil/src/cil_resolve_ast.c | 15 +++++++++++++--
- 3 files changed, 28 insertions(+), 6 deletions(-)
+ libsepol/cil/src/cil_resolve_ast.c | 14 +++++++++++++-
+ 2 files changed, 19 insertions(+), 3 deletions(-)
 
 diff --git a/libsepol/cil/src/cil_binary.c b/libsepol/cil/src/cil_binary.c
-index 40615db2..74a52956 100644
+index 03d53e1f..f6537a21 100644
 --- a/libsepol/cil/src/cil_binary.c
 +++ b/libsepol/cil/src/cil_binary.c
-@@ -511,13 +511,17 @@ int cil_typealias_to_policydb(policydb_t *pdb, struct cil_alias *cil_alias)
+@@ -513,17 +513,21 @@ int cil_typealias_to_policydb(policydb_t *pdb, struct cil_alias *cil_alias)
+ 	type_datum_t *sepol_type = NULL;
+ 	type_datum_t *sepol_alias = cil_malloc(sizeof(*sepol_alias));
  	type_datum_init(sepol_alias);
  
  	rc = __cil_get_sepol_type_datum(pdb, DATUM(cil_alias->actual), &sepol_type);
@@ -36,55 +37,34 @@ index 40615db2..74a52956 100644
  	key = cil_strdup(cil_alias->datum.fqn);
  	rc = symtab_insert(pdb, SYM_TYPES, key, sepol_alias, SCOPE_DECL, 0, NULL);
  	if (rc != SEPOL_OK) {
-+        cil_log(CIL_ERR, "Failed at %s:%s:%d:%d\n", __FILE__, __FUNCTION__, __LINE__, rc);
++        cil_log(CIL_ERR, "Failed at %s:%s:%d:%d\n", __FILE__, __FUNCTION__, __LINE__, rc);	
  		goto exit;
  	}
  	sepol_alias->s.value = sepol_type->s.value;
-@@ -3995,7 +3999,7 @@ static int __cil_node_to_policydb(struct cil_tree_node *node, void *extra_args)
+ 	sepol_alias->primary = 0;
+ 
+@@ -3774,11 +3778,11 @@ int __cil_node_to_policydb(struct cil_tree_node *node, void *extra_args)
+ 		break;
+ 	}
  
  exit:
  	if (rc != SEPOL_OK) {
 -		cil_tree_log(node, CIL_ERR, "Binary policy creation failed");
-+		cil_tree_log(node, CIL_ERR, "Binary policy creation failed, for pass = %d, flavor = %d", pass, node->flavor);
++		cil_tree_log(node, CIL_ERR, "Binary policy creation failed, for pass = %d, flavor = %d", pass, node->flavor);		
  	}
  	return rc;
  }
-diff --git a/libsepol/cil/src/cil_build_ast.c b/libsepol/cil/src/cil_build_ast.c
-index 4177c9f6..118de1f5 100644
---- a/libsepol/cil/src/cil_build_ast.c
-+++ b/libsepol/cil/src/cil_build_ast.c
-@@ -116,7 +116,7 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
  
- 	rc = cil_symtab_insert(symtab, key, datum, node);
- 	if (rc == SEPOL_EEXIST) {
--		struct cil_symtab_datum *prev;
-+		struct cil_symtab_datum *prev = NULL;
- 		rc = cil_symtab_get_datum(symtab, key, &prev);
- 		if (rc != SEPOL_OK) {
- 			cil_log(CIL_ERR, "Re-declaration of %s %s, but previous declaration could not be found\n",cil_node_to_string(node), key);
-@@ -129,7 +129,14 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
- 				cil_node_to_string(node), key);
- 			cil_tree_log(node, CIL_ERR, "Previous declaration of %s",
- 				     cil_node_to_string(n));
--			return SEPOL_ERR;
-+			if(
-+				strcmp(key, "sysfs_usb_supply") == 0 ||
-+				strcmp(key, "hostapd") == 0 ||
-+				strcmp(key, "rpmb_device") == 0) {
-+					cil_log(CIL_ERR, "Ignoring...");
-+			} else {
-+				return SEPOL_ERR;
-+			}
- 		}
- 		/* multiple_decls is enabled and works for this datum type, add node */
- 		cil_list_append(prev->nodes, CIL_NODE, node);
+ int __cil_binary_create_helper(struct cil_tree_node *node, uint32_t *finished, void *extra_args)
 diff --git a/libsepol/cil/src/cil_resolve_ast.c b/libsepol/cil/src/cil_resolve_ast.c
-index 91fa1075..d20fb7ee 100644
+index e72abdeb..a9f1ebc0 100644
 --- a/libsepol/cil/src/cil_resolve_ast.c
 +++ b/libsepol/cil/src/cil_resolve_ast.c
-@@ -522,7 +522,13 @@ static int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_ar
+@@ -510,11 +510,17 @@ int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_args, enu
+ 	if (rc != SEPOL_OK) {
+ 		goto exit;
  	}
- 	if (FLAVOR(alias_datum) != alias_flavor) {
+ 	if (NODE(alias_datum)->flavor != alias_flavor) {
  		cil_log(CIL_ERR, "%s is not an alias\n",alias_datum->name);
 -		rc = SEPOL_ERR;
 +		if(
@@ -97,20 +77,24 @@ index 91fa1075..d20fb7ee 100644
  		goto exit;
  	}
  
-@@ -563,7 +569,12 @@ static int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_f
+ 	rc = cil_resolve_name(current, aliasactual->actual_str, sym_index, extra_args, &actual_datum);
+ 	if (rc != SEPOL_OK) {
+@@ -552,10 +558,16 @@ int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_flavor f
+ 	int steps = 0;
  	int limit = 2;
  
  	if (alias->actual == NULL) {
--		cil_tree_log(current, CIL_ERR, "Alias declared but not used");
+ 		cil_tree_log(current, CIL_ERR, "Alias declared but not used");
 +		cil_tree_log(current, CIL_ERR, "Alias %s declared but not used", a1->datum.name);
 +		if(
 +			strcmp(a1->datum.name, "hostapd") == 0 ||
 +			strcmp(a1->datum.name, "sysfs_usb_supply") == 0 ||
 +			strcmp(a1->datum.name, "rpmb_device") == 0)
-+				return SEPOL_OK;
++				return SEPOL_OK;		
  		return SEPOL_ERR;
  	}
  
+ 	a1_node = a1->datum.nodes->head->data;
+ 
 -- 
-2.34.1
-
+2.45.1
