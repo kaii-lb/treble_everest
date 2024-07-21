@@ -22,17 +22,17 @@ if [[ $3 == "--reset" ]]; then
 		if echo $heads | grep -e "remotes/.*/everest" &>/dev/null;then
 			headLong=$(echo $heads | grep -e "remotes/.*/everest")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
-			echo $headshort
+			# echo needed rev is $headshort
 			git reset --hard $headshort
 		elif echo $heads | grep -e "remotes/.*/m/qpr3" &>/dev/null;then
 			headLong=$(echo $heads | grep -e "remotes/.*/m/qpr3")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
-			echo $headshort
+			# echo needed rev is $headshort
 			git reset --hard $headshort
 		elif echo $heads | grep -e "remotes/.*/crdroid" &>/dev/null;then
 			headLong=$(echo $heads | grep -e "remotes/.*/crdroid")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
-			echo $headshort
+			# echo needed rev is$headshort
 			git reset --hard $headshort
 		fi
 
