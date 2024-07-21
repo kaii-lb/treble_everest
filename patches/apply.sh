@@ -38,7 +38,7 @@ if [[ $3 == "--reset" ]]; then
 
 	   popd &>/dev/null
 	done
-if [[ $tree == *"/"* ]]; then
+elif [[ $tree == *"/"* ]]; then
 	cutDir="$(echo $tree | cut -d"/" -f2)"
 	echo $cutDir
 	cdDir="$(tr _ / <<<$cutDir |sed -e 's;platform/;;g')"
