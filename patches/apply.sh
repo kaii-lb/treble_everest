@@ -24,16 +24,19 @@ if [[ $3 == "--reset" ]]; then
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
 			# echo needed rev is $headshort
 			git reset --hard $headshort
+			echo
 		elif echo $heads | grep -e "remotes/.*/m/qpr3" &>/dev/null;then
 			headLong=$(echo $heads | grep -e "remotes/.*/m/qpr3")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
 			# echo needed rev is $headshort
 			git reset --hard $headshort
+			echo
 		elif echo $heads | grep -e "remotes/.*/crdroid" &>/dev/null;then
 			headLong=$(echo $heads | grep -e "remotes/.*/crdroid")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
 			# echo needed rev is$headshort
 			git reset --hard $headshort
+			echo
 		fi
 
 	   popd &>/dev/null
@@ -51,10 +54,12 @@ elif [[ $tree == *"/"* ]]; then
 	for patch in $patches/patches/$tree/*.patch; do
         if git am $patch; then
        		echo "PATCH $(echo $patch | cut -f9 -d"/") SUCCEEDED!"
+       		echo
        	else
        		echo "PATCH $(echo $patch | cut -f9 -d"/") FAILED, skipping..."
        		git am --skip
 #       	    exit 1
+			echo
      	fi
     done
     popd &>/dev/null
@@ -69,9 +74,11 @@ else
 	    for patch in $patches/patches/$tree/$project/*.patch; do
 	        if git am $patch; then
 	       	   echo "PATCH ${project} SUCCEEDED!"
+	       	   echo
 	       	else
 	       	   echo "PATCH ${project} FAILED, skipping..."
 	       	   git am --skip
+	       	   echo
 	     	fi
 	    done
 	    popd &>/dev/null
