@@ -25,7 +25,7 @@ if [[ $3 == "--reset" ]]; then
 			# echo needed rev is $headshort
 			git reset --hard $headshort
 			echo
-		elif echo $heads | grep -e "remotes/.*/m/qpr3" &>/dev/null;then
+		elif echo $heads | grep -e "remotes/m/qpr3" &>/dev/null;then
 			headLong=$(echo $heads | grep -e "remotes/.*/m/qpr3")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
 			# echo needed rev is $headshort
