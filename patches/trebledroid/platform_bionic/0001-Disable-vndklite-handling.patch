@@ -3,7 +3,6 @@ From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 16 Jul 2024 12:48:43 +0000
 Subject: [PATCH 1/2] Disable vndklite handling
 
-
 ---
  linker/linker.cpp | 5 -----
  1 file changed, 5 deletions(-)
@@ -41,5 +40,3 @@ index a5913c26d..2ef56d2bc 100644
    }
 -- 
 2.45.1
-
-
