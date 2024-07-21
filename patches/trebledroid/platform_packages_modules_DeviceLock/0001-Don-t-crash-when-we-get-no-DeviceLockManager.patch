@@ -9,7 +9,7 @@ Change-Id: Iaba659694e706c82a95ec2e99feb26e2bc6314e0
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/DeviceLockController/src/com/android/devicelockcontroller/SystemDeviceLockManagerImpl.java b/DeviceLockController/src/com/android/devicelockcontroller/SystemDeviceLockManagerImpl.java
-index 93540aec..23d0586f 100644
+index 93540aec..5e261fd2 100644
 --- a/DeviceLockController/src/com/android/devicelockcontroller/SystemDeviceLockManagerImpl.java
 +++ b/DeviceLockController/src/com/android/devicelockcontroller/SystemDeviceLockManagerImpl.java
 @@ -46,11 +46,14 @@ public final class SystemDeviceLockManagerImpl implements SystemDeviceLockManage
@@ -22,7 +22,7 @@ index 93540aec..23d0586f 100644
 +        if (deviceLockManager != null)
 +            mIDeviceLockService = deviceLockManager.getService();
 +        else
-+            mIDeviceLockService = null;    
++            mIDeviceLockService = null;          
      }
  
      private SystemDeviceLockManagerImpl() {
@@ -30,5 +30,6 @@ index 93540aec..23d0586f 100644
      }
 -- 
 2.45.1
+
 
 

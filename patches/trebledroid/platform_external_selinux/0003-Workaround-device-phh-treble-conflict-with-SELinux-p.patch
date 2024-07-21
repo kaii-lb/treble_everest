@@ -13,11 +13,11 @@ Luckily, Samsung doesn't do anything with those typealias, so we can
 simply ignore them.
 ---
  libsepol/cil/src/cil_binary.c      |  8 ++++++--
- libsepol/cil/src/cil_resolve_ast.c | 14 +++++++++++++-
- 2 files changed, 19 insertions(+), 3 deletions(-)
+ libsepol/cil/src/cil_resolve_ast.c | 16 ++++++++++++++--
+ 2 files changed, 20 insertions(+), 4 deletions(-)
 
 diff --git a/libsepol/cil/src/cil_binary.c b/libsepol/cil/src/cil_binary.c
-index 03d53e1f..f6537a21 100644
+index 03d53e1f..767c5c11 100644
 --- a/libsepol/cil/src/cil_binary.c
 +++ b/libsepol/cil/src/cil_binary.c
 @@ -513,17 +513,21 @@ int cil_typealias_to_policydb(policydb_t *pdb, struct cil_alias *cil_alias)
@@ -30,14 +30,14 @@ index 03d53e1f..f6537a21 100644
 +	if (rc != SEPOL_OK) {
 +        cil_log(CIL_ERR, "Failed at %s:%s:%d\n", __FILE__, __FUNCTION__, __LINE__);
 +        goto exit;
-+    }
++    }	
  
  	sepol_alias->flavor = TYPE_TYPE;
  
  	key = cil_strdup(cil_alias->datum.fqn);
  	rc = symtab_insert(pdb, SYM_TYPES, key, sepol_alias, SCOPE_DECL, 0, NULL);
  	if (rc != SEPOL_OK) {
-+        cil_log(CIL_ERR, "Failed at %s:%s:%d:%d\n", __FILE__, __FUNCTION__, __LINE__, rc);	
++        cil_log(CIL_ERR, "Failed at %s:%s:%d:%d\n", __FILE__, __FUNCTION__, __LINE__, rc);
  		goto exit;
  	}
  	sepol_alias->s.value = sepol_type->s.value;
@@ -57,10 +57,10 @@ index 03d53e1f..f6537a21 100644
  
  int __cil_binary_create_helper(struct cil_tree_node *node, uint32_t *finished, void *extra_args)
 diff --git a/libsepol/cil/src/cil_resolve_ast.c b/libsepol/cil/src/cil_resolve_ast.c
-index e72abdeb..a9f1ebc0 100644
+index e72abdeb..0a7fb84f 100644
 --- a/libsepol/cil/src/cil_resolve_ast.c
 +++ b/libsepol/cil/src/cil_resolve_ast.c
-@@ -510,11 +510,17 @@ int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_args, enu
+@@ -510,11 +510,18 @@ int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_args, enu
  	if (rc != SEPOL_OK) {
  		goto exit;
  	}
@@ -74,17 +74,19 @@ index e72abdeb..a9f1ebc0 100644
 +				rc = 0;
 +			else
 +				rc = SEPOL_ERR;
++
  		goto exit;
  	}
  
  	rc = cil_resolve_name(current, aliasactual->actual_str, sym_index, extra_args, &actual_datum);
  	if (rc != SEPOL_OK) {
-@@ -552,10 +558,16 @@ int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_flavor f
+@@ -551,11 +558,16 @@ int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_flavor f
+ 	struct cil_tree_node *a1_node = NULL;
  	int steps = 0;
  	int limit = 2;
  
  	if (alias->actual == NULL) {
- 		cil_tree_log(current, CIL_ERR, "Alias declared but not used");
+-		cil_tree_log(current, CIL_ERR, "Alias declared but not used");
 +		cil_tree_log(current, CIL_ERR, "Alias %s declared but not used", a1->datum.name);
 +		if(
 +			strcmp(a1->datum.name, "hostapd") == 0 ||
