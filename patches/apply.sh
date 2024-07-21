@@ -8,6 +8,36 @@ patches="${patches}/treblestuff"
 
 echo patchesDir $patches
 
+if [[ $3 == "--reset" ]]; then
+	for project in $(cd $patches/patches/$tree; echo *); do
+	   p="$(tr _ / <<<$project |sed -e 's;platform/;;g')"
+	   [ "$p" == build ] && p=build/make
+	   [ "$p" == treble/app ] && p=treble_app
+	   [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay    
+	   echo directory is $p
+	   pushd $p &>/dev/null
+
+		heads=$(git show-ref)
+
+		if echo $heads | grep -e "remotes/.*/everest" &>/dev/null;then
+			headLong=$(echo $heads | grep -e "remotes/.*/everest")
+			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
+			echo $headshort
+			git reset --hard $headshort
+		elif echo $heads | grep -e "remotes/.*/m/qpr3" &>/dev/null;then
+			headLong=$(echo $heads | grep -e "remotes/.*/m/qpr3")
+			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
+			echo $headshort
+			git reset --hard $headshort
+		elif echo $heads | grep -e "remotes/.*/crdroid" &>/dev/null;then
+			headLong=$(echo $heads | grep -e "remotes/.*/crdroid")
+			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
+			echo $headshort
+			git reset --hard $headshort
+		fi
+
+	   popd &>/dev/null
+	done
 if [[ $tree == *"/"* ]]; then
 	cutDir="$(echo $tree | cut -d"/" -f2)"
 	echo $cutDir
