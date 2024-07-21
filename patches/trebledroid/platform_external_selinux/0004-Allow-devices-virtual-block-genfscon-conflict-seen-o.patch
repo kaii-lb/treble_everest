@@ -10,12 +10,12 @@ Change-Id: I06e4e9d5b82d61a8aeab595b47e2589249675895
  1 file changed, 17 insertions(+), 1 deletion(-)
 
 diff --git a/libsepol/cil/src/cil_post.c b/libsepol/cil/src/cil_post.c
-index a0cadfde..02fa7f91 100644
+index a7c66ead..99410da0 100644
 --- a/libsepol/cil/src/cil_post.c
 +++ b/libsepol/cil/src/cil_post.c
-@@ -475,11 +475,27 @@ int cil_post_portcon_context_compare(const void *a, const void *b)
+@@ -489,11 +489,27 @@ static int cil_post_portcon_context_compare(const void *a, const void *b)
  
- int cil_post_genfscon_context_compare(const void *a, const void *b)
+ static int cil_post_genfscon_context_compare(const void *a, const void *b)
  {
  	struct cil_genfscon *a_genfscon = *(struct cil_genfscon**)a;
  	struct cil_genfscon *b_genfscon = *(struct cil_genfscon**)b;
@@ -36,10 +36,10 @@ index a0cadfde..02fa7f91 100644
 +			return 0;
 +		}
 +	}
-+	return rc;	
++	return rc;
  }
  
- int cil_post_netifcon_context_compare(const void *a, const void *b)
+ static int cil_post_netifcon_context_compare(const void *a, const void *b)
  {
  	int rc;
 -- 
