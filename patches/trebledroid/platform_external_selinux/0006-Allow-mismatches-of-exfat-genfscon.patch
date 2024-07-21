@@ -8,10 +8,10 @@ Subject: [PATCH 06/10] Allow mismatches of exfat genfscon
  1 file changed, 4 insertions(+)
 
 diff --git a/libsepol/cil/src/cil_post.c b/libsepol/cil/src/cil_post.c
-index 02fa7f91..34ce3856 100644
+index 99410da0..7a51d175 100644
 --- a/libsepol/cil/src/cil_post.c
 +++ b/libsepol/cil/src/cil_post.c
-@@ -486,10 +486,14 @@ int cil_post_genfscon_context_compare(const void *a, const void *b)
+@@ -500,10 +500,14 @@ static int cil_post_genfscon_context_compare(const void *a, const void *b)
  		* - AOSP Q says (genfscon sysfs /devices/virtual/block/ (u object_r sysfs_devices_block ((s0) (s0))))
  		* - stock rom says (genfscon sysfs /devices/virtual/block/ (u object_r sysfs_ufs_target ((s0) (s0))))
  		*/
