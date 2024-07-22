@@ -1,4 +1,4 @@
-From 2f8b7f6bbbcd30282ef9b8100133f26670557da5 Mon Sep 17 00:00:00 2001
+From c4e188c849f31211acc099c4dfd2268ad91cf7af Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 31 Mar 2021 23:32:37 +0200
 Subject: [PATCH 03/10] Workaround device/phh/treble conflict with SELinux
@@ -18,12 +18,10 @@ simply ignore them.
  3 files changed, 28 insertions(+), 6 deletions(-)
 
 diff --git a/libsepol/cil/src/cil_binary.c b/libsepol/cil/src/cil_binary.c
-index 40615db2..e8383e24 100644
+index 40615db2..7d186515 100644
 --- a/libsepol/cil/src/cil_binary.c
 +++ b/libsepol/cil/src/cil_binary.c
-@@ -509,17 +509,21 @@ int cil_typealias_to_policydb(policydb_t *pdb, struct cil_alias *cil_alias)
- 	type_datum_t *sepol_type = NULL;
- 	type_datum_t *sepol_alias = cil_malloc(sizeof(*sepol_alias));
+@@ -511,13 +511,17 @@ int cil_typealias_to_policydb(policydb_t *pdb, struct cil_alias *cil_alias)
  	type_datum_init(sepol_alias);
  
  	rc = __cil_get_sepol_type_datum(pdb, DATUM(cil_alias->actual), &sepol_type);
@@ -42,11 +40,7 @@ index 40615db2..e8383e24 100644
  		goto exit;
  	}
  	sepol_alias->s.value = sepol_type->s.value;
- 	sepol_alias->primary = 0;
- 
-@@ -3993,11 +3997,11 @@ static int __cil_node_to_policydb(struct cil_tree_node *node, void *extra_args)
- 		break;
- 	}
+@@ -3995,7 +3999,7 @@ static int __cil_node_to_policydb(struct cil_tree_node *node, void *extra_args)
  
  exit:
  	if (rc != SEPOL_OK) {
@@ -55,15 +49,11 @@ index 40615db2..e8383e24 100644
  	}
  	return rc;
  }
- 
- static int __cil_binary_create_helper(struct cil_tree_node *node, uint32_t *finished, void *extra_args)
 diff --git a/libsepol/cil/src/cil_build_ast.c b/libsepol/cil/src/cil_build_ast.c
-index 4177c9f6..f16f05eb 100644
+index 4177c9f6..118de1f5 100644
 --- a/libsepol/cil/src/cil_build_ast.c
 +++ b/libsepol/cil/src/cil_build_ast.c
-@@ -114,11 +114,11 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
- 		return SEPOL_ERR;
- 	}
+@@ -116,7 +116,7 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
  
  	rc = cil_symtab_insert(symtab, key, datum, node);
  	if (rc == SEPOL_EEXIST) {
@@ -72,14 +62,10 @@ index 4177c9f6..f16f05eb 100644
  		rc = cil_symtab_get_datum(symtab, key, &prev);
  		if (rc != SEPOL_OK) {
  			cil_log(CIL_ERR, "Re-declaration of %s %s, but previous declaration could not be found\n",cil_node_to_string(node), key);
- 			return SEPOL_ERR;
- 		}
-@@ -127,11 +127,18 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
- 			struct cil_tree_node *n = NODE(prev);
- 			cil_log(CIL_ERR, "Re-declaration of %s %s\n",
+@@ -129,7 +129,14 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
  				cil_node_to_string(node), key);
  			cil_tree_log(node, CIL_ERR, "Previous declaration of %s",
- 				    cil_node_to_string(n));
+ 				     cil_node_to_string(n));
 -			return SEPOL_ERR;
 +			if(
 +				strcmp(key, "sysfs_usb_supply") == 0 ||
@@ -92,15 +78,11 @@ index 4177c9f6..f16f05eb 100644
  		}
  		/* multiple_decls is enabled and works for this datum type, add node */
  		cil_list_append(prev->nodes, CIL_NODE, node);
- 		node->data = prev;
- 		return SEPOL_EEXIST;
 diff --git a/libsepol/cil/src/cil_resolve_ast.c b/libsepol/cil/src/cil_resolve_ast.c
-index 91fa1075..4f559f53 100644
+index 91fa1075..d20fb7ee 100644
 --- a/libsepol/cil/src/cil_resolve_ast.c
 +++ b/libsepol/cil/src/cil_resolve_ast.c
-@@ -520,11 +520,17 @@ static int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_ar
- 	if (rc != SEPOL_OK) {
- 		goto exit;
+@@ -522,7 +522,13 @@ static int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_ar
  	}
  	if (FLAVOR(alias_datum) != alias_flavor) {
  		cil_log(CIL_ERR, "%s is not an alias\n",alias_datum->name);
@@ -115,11 +97,7 @@ index 91fa1075..4f559f53 100644
  		goto exit;
  	}
  
- 	rc = cil_resolve_name(current, aliasactual->actual_str, sym_index, extra_args, &actual_datum);
- 	if (rc != SEPOL_OK) {
-@@ -561,11 +567,16 @@ static int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_f
- 	struct cil_tree_node *a1_node = NULL;
- 	int steps = 0;
+@@ -563,7 +569,12 @@ static int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_f
  	int limit = 2;
  
  	if (alias->actual == NULL) {
@@ -133,7 +111,5 @@ index 91fa1075..4f559f53 100644
  		return SEPOL_ERR;
  	}
  
- 	a1_node = a1->datum.nodes->head->data;
- 
 -- 
-2.45.2
+2.34.1
