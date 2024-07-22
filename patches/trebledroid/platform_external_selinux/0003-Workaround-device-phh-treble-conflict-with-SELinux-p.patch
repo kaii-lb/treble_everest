@@ -18,7 +18,7 @@ simply ignore them.
  3 files changed, 28 insertions(+), 6 deletions(-)
 
 diff --git a/libsepol/cil/src/cil_binary.c b/libsepol/cil/src/cil_binary.c
-index 40615db2..7d186515 100644
+index 40615db2..e8383e24 100644
 --- a/libsepol/cil/src/cil_binary.c
 +++ b/libsepol/cil/src/cil_binary.c
 @@ -509,17 +509,21 @@ int cil_typealias_to_policydb(policydb_t *pdb, struct cil_alias *cil_alias)
@@ -58,7 +58,7 @@ index 40615db2..7d186515 100644
  
  static int __cil_binary_create_helper(struct cil_tree_node *node, uint32_t *finished, void *extra_args)
 diff --git a/libsepol/cil/src/cil_build_ast.c b/libsepol/cil/src/cil_build_ast.c
-index 960e3484..1cc3dfea 100644
+index 4177c9f6..f16f05eb 100644
 --- a/libsepol/cil/src/cil_build_ast.c
 +++ b/libsepol/cil/src/cil_build_ast.c
 @@ -114,11 +114,11 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
@@ -88,14 +88,14 @@ index 960e3484..1cc3dfea 100644
 +					cil_log(CIL_ERR, "Ignoring...");
 +			} else {
 +				return SEPOL_ERR;
-+			}			
++			}
  		}
  		/* multiple_decls is enabled and works for this datum type, add node */
  		cil_list_append(prev->nodes, CIL_NODE, node);
  		node->data = prev;
  		return SEPOL_EEXIST;
 diff --git a/libsepol/cil/src/cil_resolve_ast.c b/libsepol/cil/src/cil_resolve_ast.c
-index 91fa1075..f806cbc2 100644
+index 91fa1075..4f559f53 100644
 --- a/libsepol/cil/src/cil_resolve_ast.c
 +++ b/libsepol/cil/src/cil_resolve_ast.c
 @@ -520,11 +520,17 @@ static int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_ar
@@ -111,7 +111,7 @@ index 91fa1075..f806cbc2 100644
 +			strcmp(alias_datum->name, "rpmb_device") == 0)
 +				rc = 0;
 +			else
-+				rc = SEPOL_ERR;		
++				rc = SEPOL_ERR;
  		goto exit;
  	}
  
@@ -136,4 +136,4 @@ index 91fa1075..f806cbc2 100644
  	a1_node = a1->datum.nodes->head->data;
  
 -- 
-2.45.1
+2.45.2
