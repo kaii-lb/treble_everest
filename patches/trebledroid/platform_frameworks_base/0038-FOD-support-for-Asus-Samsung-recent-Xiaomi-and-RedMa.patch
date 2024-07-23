@@ -27,13 +27,13 @@ Typo in observing Samsung brightness
  packages/SystemUI/Android.bp                  |   4 +
  .../systemui/biometrics/UdfpsController.java  |  79 +++++
  .../biometrics/UdfpsControllerOverlay.kt      |   7 +-
- .../android/systemui/biometrics/UdfpsView.kt  | 232 ++++++++++++++
+ .../android/systemui/biometrics/UdfpsView.kt  | 233 ++++++++++++++
  .../shared/DeviceEntryUdfpsRefactor.kt        |   2 +-
  services/core/Android.bp                      |   5 +
  .../server/biometrics/AuthService.java        | 297 +++++++++++++++++-
  .../fingerprint/FingerprintService.java       |   4 +-
  .../fingerprint/aidl/FingerprintProvider.java |  28 +-
- 9 files changed, 650 insertions(+), 8 deletions(-)
+ 9 files changed, 651 insertions(+), 8 deletions(-)
 
 diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
 index ce6057dd807b..039197d604c6 100644
