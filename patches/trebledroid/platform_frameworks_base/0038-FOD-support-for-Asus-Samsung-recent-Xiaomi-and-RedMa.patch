@@ -27,13 +27,13 @@ Typo in observing Samsung brightness
  packages/SystemUI/Android.bp                  |   4 +
  .../systemui/biometrics/UdfpsController.java  |  79 +++++
  .../biometrics/UdfpsControllerOverlay.kt      |   7 +-
- .../android/systemui/biometrics/UdfpsView.kt  | 233 ++++++++++++++
+ .../android/systemui/biometrics/UdfpsView.kt  | 232 ++++++++++++++
  .../shared/DeviceEntryUdfpsRefactor.kt        |   2 +-
  services/core/Android.bp                      |   5 +
  .../server/biometrics/AuthService.java        | 297 +++++++++++++++++-
  .../fingerprint/FingerprintService.java       |   4 +-
  .../fingerprint/aidl/FingerprintProvider.java |  28 +-
- 9 files changed, 651 insertions(+), 8 deletions(-)
+ 9 files changed, 650 insertions(+), 8 deletions(-)
 
 diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
 index ce6057dd807b..039197d604c6 100644
@@ -553,8 +553,7 @@ index ecd20d78f5d0..cad8ef6dbf51 100644
          }
          mUdfpsDisplayMode?.disable(null /* onDisabled */)
 +
-+        if (hasAsusGhbm) {
-+            fodFileObserver = object: FileObserver(asusGhbmOnAchieved, FileObserver.MODIFY) {
++        if (hasAsusGhbm) {            fodFileObserver = object: FileObserver(asusGhbmOnAchieved, FileObserver.MODIFY) {
 +                override fun onEvent(event: Int, path: String?): Unit {
 +                    if (path == null) return
 +                    Log.d("PHH-Enroll", "Asus ghbm event")
