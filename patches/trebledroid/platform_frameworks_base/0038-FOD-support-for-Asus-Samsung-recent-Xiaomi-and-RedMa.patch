@@ -553,7 +553,8 @@ index ecd20d78f5d0..cad8ef6dbf51 100644
          }
          mUdfpsDisplayMode?.disable(null /* onDisabled */)
 +
-+        if (hasAsusGhbm) {+            fodFileObserver = object: FileObserver(asusGhbmOnAchieved, FileObserver.MODIFY) {
++        if (hasAsusGhbm) {
++            fodFileObserver = object: FileObserver(asusGhbmOnAchieved, FileObserver.MODIFY) {
 +                override fun onEvent(event: Int, path: String?): Unit {
 +                    if (path == null) return
 +                    Log.d("PHH-Enroll", "Asus ghbm event")
