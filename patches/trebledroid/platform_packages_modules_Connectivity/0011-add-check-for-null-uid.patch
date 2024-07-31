@@ -1,0 +1,36 @@
+From 471a0227c414735319dcc7d720b0627d4493c6ec Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Wed, 31 Jul 2024 16:07:42 +0000
+Subject: [PATCH] add check for null uid
+
+---
+ framework/src/android/net/BpfNetMapsReader.java | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/framework/src/android/net/BpfNetMapsReader.java b/framework/src/android/net/BpfNetMapsReader.java
+index 480337c322..af1b4d9f05 100644
+--- a/framework/src/android/net/BpfNetMapsReader.java
++++ b/framework/src/android/net/BpfNetMapsReader.java
+@@ -248,14 +248,17 @@ public class BpfNetMapsReader {
+             boolean isDataSaverEnabled) {
+         throwIfPreT("isUidBlockedByFirewallChains is not available on pre-T devices");
+ 
+         final long uidRuleConfig;
+         final long uidMatch;
++
+         try {
+-            uidRuleConfig = mConfigurationMap.getValue(UID_RULES_CONFIGURATION_KEY).val;
+-            final UidOwnerValue value = mUidOwnerMap.getValue(new S32(uid));
+-            uidMatch = (value != null) ? value.rule : 0L;
++			if (UID_RULES_CONFIGURATION_KEY != null && uid != null && S32(uid) != null) {
++	           uidRuleConfig = mConfigurationMap.getValue(UID_RULES_CONFIGURATION_KEY).val;
++	           final UidOwnerValue value = mUidOwnerMap.getValue(new S32(uid));
++	           uidMatch = (value != null) ? value.rule : 0L;
++			}
+         } catch (ErrnoException e) {
+             throw new ServiceSpecificException(e.errno,
+                     "Unable to get firewall chain status: " + Os.strerror(e.errno));
+         }
+ 
+-- 
+2.45.2

@@ -16,5 +16,4 @@ WITH_GAPPS := false
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device
 
-PRODUCT_PACKAGES += \
-	org.lineageos.glimpse
+PRODUCT_PACKAGES += 
