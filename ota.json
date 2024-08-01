@@ -1,0 +1,16 @@
+{
+  "version": "v1.1.0 Initial Release",
+  "date": "1722524584",
+  "variants": [
+    {
+      "name": "everest_arm64_bgN",
+      "size": "1686476592",
+      "url": "https://github.com/kaii-lb/treble_manifest/releases/download/v1.1/EverestOS_1_3_arm64_bgN-FULL_GAPPS.xz"
+    },
+    {
+      "name": "everest_arm64_bvN",
+      "size": "1070985456",
+      "url": "https://github.com/kaii-lb/treble_manifest/releases/download/v1.1/EverestOS_1_3_arm64_bvN_NO_GAPPS.tar.xz"
+    }
+  ]
+}
