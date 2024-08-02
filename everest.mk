@@ -16,9 +16,7 @@ PRODUCT_PACKAGE_OVERLAYS += \
 
 # Packages
 PRODUCT_PACKAGES += \
-  # AuroraStorePrivilegedExtension \
-  # F-DroidPrivilegedExtension \
-  # OpenEUICC
+  OpenEUICC
 
 # Everest Specific Build Flags
 EVEREST_BUILD_TYPE := UNOFFICIAL
