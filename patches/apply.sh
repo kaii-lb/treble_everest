@@ -23,19 +23,22 @@ if [[ $3 == "--reset" ]]; then
 			headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/everest")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
 			echo needed rev is $headshort
-			git reset --hard $headshort
+#			git reset --hard $headshort
+			git reset --hard FETCH_HEAD
 			echo
 		elif echo $heads | tr ' ' "\n" | grep -e "remotes/m/qpr3" &>/dev/null;then
 			headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/m/qpr3")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
 			echo needed rev is $headshort
-			git reset --hard $headshort
+#			git reset --hard $headshort
+			git reset --hard FETCH_HEAD
 			echo
 		elif echo $heads | tr ' ' "\n" | grep -e "remotes/crdroid" &>/dev/null;then
 			headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/crdroid")
 			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
 			echo needed rev is $headshort
-			git reset --hard $headshort
+#			git reset --hard $headshort
+			git reset --hard FETCH_HEAD
 			echo
 		fi
 
