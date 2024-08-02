@@ -1,0 +1,5 @@
+# for mtkradioex_ims | qc_ril_audio | ims_radio 
+
+# Allow system_app to find default_android_service
+allow system_app default_android_service:service_manager find;
+

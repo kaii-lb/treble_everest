@@ -1,0 +1,8 @@
+type pm_archiving_enabled_prop, file_type, property_type;
+
+# Define the file context for this property
+files_type(pm_archiving_enabled_prop, file_type);
+
+# Allow the platform_app to read the property
+allow platform_app pm_archiving_enabled_prop:file read;
+

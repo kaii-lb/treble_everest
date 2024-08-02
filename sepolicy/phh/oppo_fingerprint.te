@@ -1,0 +1,3 @@
+# Allow hal_fingerprint_oppo_compat to find the default_android_hwservice service
+allow hal_fingerprint_oppo_compat default_android_hwservice:hwservice_manager find;
+
