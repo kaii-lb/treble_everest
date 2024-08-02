@@ -18,7 +18,7 @@ index 61388923c5bd..067cc2048afa 100644
              mMediaRecorder.setVideoEncodingProfileLevel(
                      MediaCodecInfo.CodecProfileLevel.AVCProfileMain,
 -                    mLowQuality ? MediaCodecInfo.CodecProfileLevel.AVCLevel32/*level 3.2*/
-+                    mLowQuality ? MediaCodecInfo.CodecProfileLevel.AVCLevel3/*level 3.2*/
++                    mLowQuality ? MediaCodecInfo.CodecProfileLevel.AVCLevel3/*level 3*/
                      : getAvcProfileLevelCodeByName(mAvcProfileLevel));
          } else {
              mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.HEVC);
