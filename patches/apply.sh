@@ -10,37 +10,38 @@ echo patchesDir $patches
 
 if [[ $3 == "--reset" ]]; then
 	for project in $(cd $patches/patches/$tree; echo *); do
-	   p="$(tr _ / <<<$project |sed -e 's;platform/;;g')"
-	   [ "$p" == build ] && p=build/make
-	   [ "$p" == treble/app ] && p=treble_app
-	   [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay    
-	   echo directory is $p
-	   pushd $p &>/dev/null
+	    p="$(tr _ / <<<$project |sed -e 's;platform/;;g')"
+	    [ "$p" == build ] && p=build/make
+	    [ "$p" == treble/app ] && p=treble_app
+	    [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay    
+	    echo directory is $p
+	    pushd $p &>/dev/null
 
-		heads=$(git show-ref)
+		# heads=$(git show-ref)
 
-		if echo $heads | tr ' ' "\n" | grep -e "remotes/everest" &>/dev/null;then
-			headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/everest")
-			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
-			echo needed rev is $headshort
-			git reset --hard $headshort
-			echo
-		elif echo $heads | tr ' ' "\n" | grep -e "remotes/m/qpr3" &>/dev/null;then
-			headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/m/qpr3")
-			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
-			echo needed rev is $headshort
-			git reset --hard $headshort
-			echo
-		elif echo $heads | tr ' ' "\n" | grep -e "remotes/crdroid" &>/dev/null;then
-			headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/crdroid")
-			headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
-			echo needed rev is $headshort
-			git reset --hard $headshort
-			echo
-		fi
+		# if echo $heads | tr ' ' "\n" | grep -e "remotes/everest" &>/dev/null;then
+		# 	headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/everest")
+		# 	headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
+		# 	echo needed rev is $headshort
+		# 	git reset --hard $headshort
+		# 	echo
+		# elif echo $heads | tr ' ' "\n" | grep -e "remotes/m/qpr3" &>/dev/null;then
+		# 	headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/m/qpr3")
+		# 	headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
+		# 	echo needed rev is $headshort
+		# 	git reset --hard $headshort
+		# 	echo
+		# elif echo $heads | tr ' ' "\n" | grep -e "remotes/crdroid" &>/dev/null;then
+		# 	headLong=$(echo $heads | tr ' ' "\n" | grep -e "remotes/crdroid")
+		# 	headshort=$(echo $headLong | cut -f3-4 -d'/' | cut -f1 -d" ")
+		# 	echo needed rev is $headshort
+		# 	git reset --hard $headshort
+		# 	echo
+		# fi
+		git reset --hard FETCH_HEAD
 
 		if git am --abort &>/dev/null;then
-			echo aborted patchet
+			echo aborted patchset
 		fi
 
 	   popd &>/dev/null
