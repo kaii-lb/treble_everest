@@ -1,7 +1,3 @@
-module launcher3_pm_policy 1.0;
-
-# Define a new type for the property if not already defined
-type pm_archiving_enabled_prop, file_type, property_type;
 # Define the file context for this property
 files_type(pm_archiving_enabled_prop, file_type);
 

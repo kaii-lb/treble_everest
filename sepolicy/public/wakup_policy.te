@@ -1,8 +1,0 @@
-module wakeup_policy 1.0;
-
-# Define the type for sysfs directory if not already defined
-type sysfs, dir_type;
-
-# Allow the system_suspend domain to read from sysfs directories
-allow system_suspend sysfs:dir read;
-

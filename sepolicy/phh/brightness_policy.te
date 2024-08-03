@@ -1,10 +1,2 @@
-module brightness_policy 1.0;
-
-require {
-    type hal_graphics_composer_default;
-    type sysfs_lcd_writable;
-    class file { read write };
-}
-
 # Allow the hal_graphics_composer_default process to read and write to sysfs_lcd_writable
 allow hal_graphics_composer_default sysfs_lcd_writable:file { read write };
