@@ -1,3 +1,5 @@
+type pm_archiving_enabled_prop, file_type, property_type;
+
 # Define the file context for this property
 files_type(pm_archiving_enabled_prop, file_type);
 
