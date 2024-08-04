@@ -21,6 +21,7 @@ For any other issues, report them via the [Issues](https://github.com/cawilliams
 
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
+- Zeke over on telegram, the entire GSI wouldn't be possible without them.
 - [Chris AW](https://github.com/cawilliamson/treble_voltage)
 - [VoltageOS Team](https://github.com/VoltageOS)
 - [Phhusson](https://github.com/phhusson)
