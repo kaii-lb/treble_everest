@@ -1,5 +1,5 @@
 # Define the type for sysfs directory if not already defined
-type sysfs, dir_type, sysfs_batteryinfo, sysfs_usb_nonplat;
+type sysfs, dir_type, sysfs_batteryinfo, sysfs_usb_nonplat, system_suspend;
 
 # Allow the system_suspend domain to read from sysfs directories
 allow system_suspend sysfs:dir read;

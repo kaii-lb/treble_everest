@@ -1,3 +1,5 @@
+type mediaprovider_app, radio_service, service_manager;
+
 # Allow mediaprovider_app to find the radio_service service
 allow mediaprovider_app radio_service:service_manager find;
     
