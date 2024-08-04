@@ -1,3 +1,5 @@
+type phhsu_daemon, hal_bootctl_service, service_manager;
+
 # Allow phhsu_daemon to find the hal_bootctl_service service
 allow phhsu_daemon hal_bootctl_service:service_manager find;
 

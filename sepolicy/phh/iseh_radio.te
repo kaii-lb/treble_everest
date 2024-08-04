@@ -1,0 +1,6 @@
+# Define a type for the radio domain if not already defined
+# (Skip this if already defined in your policies)
+type radio, domain;
+
+# Allow radio domain to find the vendor.samsung.hardware.radio::ISehRadio interface
+allow radio default_android_hwservice:hwservice_manager find;

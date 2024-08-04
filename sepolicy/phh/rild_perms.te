@@ -1,3 +1,5 @@
+type rild, vendor_default_prop, property_service;
+
 # Allow rild to set the vendor.sms.md.ready property
 allow rild vendor_default_prop:property_service set;
 
