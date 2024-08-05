@@ -22,7 +22,7 @@ index 480337c322..af1b4d9f05 100644
 -            uidRuleConfig = mConfigurationMap.getValue(UID_RULES_CONFIGURATION_KEY).val;
 -            final UidOwnerValue value = mUidOwnerMap.getValue(new S32(uid));
 -            uidMatch = (value != null) ? value.rule : 0L;
-+			if (UID_RULES_CONFIGURATION_KEY != null && uid != null && S32(uid) != null) {
++			if (UID_RULES_CONFIGURATION_KEY != null) {
 +	           uidRuleConfig = mConfigurationMap.getValue(UID_RULES_CONFIGURATION_KEY).val;
 +	           final UidOwnerValue value = mUidOwnerMap.getValue(new S32(uid));
 +	           uidMatch = (value != null) ? value.rule : 0L;
