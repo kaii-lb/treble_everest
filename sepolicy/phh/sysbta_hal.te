@@ -1,0 +1,8 @@
+system_vendor_config_prop(sysbta_hal_prop)
+
+ro.hardware.audio.sysbta u:object_r:sysbta_hal_prop:s0 
+
+get_prop(hal_audio_sysbta, sysbta_hal_prop)
+
+allow servicemanager hal_audio_sysbta:dir r_dir_perms;
+allow servicemanager hal_audio_sysbta:file r_file_perms;

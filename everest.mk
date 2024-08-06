@@ -16,7 +16,11 @@ PRODUCT_PACKAGE_OVERLAYS += \
 
 # Packages
 PRODUCT_PACKAGES += \
-  OpenEUICC
+  OpenEUICC \
+  $(call subtract-product-packages, \
+      $(PRODUCT_PACKAGES), \
+      org.codeaurora.ims)
+
 
 # Everest Specific Build Flags
 EVEREST_BUILD_TYPE := UNOFFICIAL
