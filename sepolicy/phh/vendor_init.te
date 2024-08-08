@@ -1,5 +1,1 @@
-# maybe should set this by property, but i think vendor init should have access to everything
-# as without it half the system breaks
-
-# Allow vendor_init to set the ro.product.build.date property
-allow vendor_init build_prop:property_service set;
+allow vendor_init sf_hs_mode_prop:property_service set;

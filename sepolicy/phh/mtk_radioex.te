@@ -1,3 +1,0 @@
-# Allow radio to find the specific Mediatek extended radio service
-# specific is a gross exaggeration i need to find a way to only specify the process
-allow radio default_android_service:service_manager find;

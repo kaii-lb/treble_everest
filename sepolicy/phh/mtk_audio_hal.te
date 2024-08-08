@@ -1,5 +1,0 @@
-system_public_prop(mtk_audio_hal_prop)
-
-sys.oppo.mm.voice.record u:object_r:mtk_audio_hal_prop:s0 exact int
-
-get_prop(mtk_hal_audio, mtk_audio_hal_prop)

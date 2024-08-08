@@ -21,6 +21,10 @@ PRODUCT_PACKAGES += \
       $(PRODUCT_PACKAGES), \
       org.codeaurora.ims) 
 
+# Ota
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.system.ota.json_url=https://raw.githubusercontent.com/kaii-lb/treble_everest/14/ota.json
+
 # Everest Specific Build Flags
 EVEREST_BUILD_TYPE := UNOFFICIAL
 EVEREST_MAINTAINER := "kaii-lb"
