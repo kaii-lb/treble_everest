@@ -3,3 +3,4 @@
 
 # Allow vendor_init to set the ro.product.build.date property
 allow vendor_init build_prop:property_service set;
+allow vendor_init default_prop:property_service set;
