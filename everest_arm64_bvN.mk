@@ -18,4 +18,11 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device
 
-PRODUCT_PACKAGES += 
+PRODUCT_PACKAGES += \
+  $(call subtract-product-packages, \
+        $(PRODUCT_PACKAGES), \
+        com.android.wallpaper)
+
+PRODUCT_COPY_FILES += \
+	vendor/gms/common/proprietary/system_ext/priv-app/WallpaperPickerGoogleRelease/WallpaperPickerGoogleRelease.apk:system/system_ext/priv-app/WallpaperPickerGoogleRelease/WallpaperPickerGoogleRelease.apk
+	
