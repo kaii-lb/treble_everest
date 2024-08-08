@@ -13,9 +13,6 @@ PRODUCT_MODEL := EverestOS with GApps
 
 WITH_GAPPS := true
 
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.system.ota.json_url=https://raw.githubusercontent.com/kaii-lb/treble_everest/14/ota.json
-
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device
 
