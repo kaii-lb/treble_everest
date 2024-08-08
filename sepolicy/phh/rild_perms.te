@@ -1,3 +1,1 @@
-# Allow rild to set the vendor.sms.md.ready property
-allow rild vendor_default_prop:property_service set;
-
+allow rild system_prop:file { read };
