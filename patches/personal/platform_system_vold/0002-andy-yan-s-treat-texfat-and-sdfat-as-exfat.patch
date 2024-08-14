@@ -1,0 +1,31 @@
+From c6caa8055f2533c9af4330b1d6c2aa68ae43fc43 Mon Sep 17 00:00:00 2001
+From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
+Date: Wed, 14 Aug 2024 12:51:05 +0000
+Subject: [PATCH] andy yan's treat texfat and sdfat as exfat
+
+---
+ Utils.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/Utils.cpp b/Utils.cpp
+index 9fdbe50..dc48385 100644
+--- a/Utils.cpp
++++ b/Utils.cpp
+@@ -1058,10 +1058,15 @@ bool IsFilesystemSupported(const std::string& fsType) {
+ 
+     /* fuse filesystems */
+     supported.append("fuse\tntfs\n"
+                      "fuse\texfat\n");
+ 
++    /* treat sdfat/texfat as exfat */
++    if (supported.find("sdfat\n") != std::string::npos || supported.find("texfat\n") != std::string::npos) {
++        supported.append("\texfat\n");
++    }                     
++
+     return supported.find(fsType + "\n") != std::string::npos;
+ }
+ 
+ bool IsSdcardfsUsed() {
+     return IsFilesystemSupported("sdcardfs") &&
+-- 
+2.45.2
