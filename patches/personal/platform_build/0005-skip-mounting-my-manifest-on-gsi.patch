@@ -8,13 +8,13 @@ All my_* partitions are supposedly useless on GSIs, but only skip this for now
 
 Change-Id: I638fd8ed2cfd7ca835a8e46fd235ebf08c2460a4
 ---
- make/target/product/gsi/gsi_skip_mount.cfg | 3 +++
+ target/product/gsi/gsi_skip_mount.cfg | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/make/target/product/gsi/gsi_skip_mount.cfg b/make/target/product/gsi/gsi_skip_mount.cfg
+diff --git a/target/product/gsi/gsi_skip_mount.cfg b/target/product/gsi/gsi_skip_mount.cfg
 index 28f434966..612c3bc81 100644
---- a/make/target/product/gsi/gsi_skip_mount.cfg
-+++ b/make/target/product/gsi/gsi_skip_mount.cfg
+--- a/target/product/gsi/gsi_skip_mount.cfg
++++ b/target/product/gsi/gsi_skip_mount.cfg
 @@ -7,3 +7,6 @@
  /product/*
  /system_ext/*
