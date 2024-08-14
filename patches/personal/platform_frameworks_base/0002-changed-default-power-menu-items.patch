@@ -1,0 +1,30 @@
+From 11e130a57fe2399d91827282d090038a6122ec3d Mon Sep 17 00:00:00 2001
+From: Crave <aosp@crave.io>
+Date: Wed, 14 Aug 2024 13:15:35 +0000
+Subject: [PATCH] changed default power menu items
+
+---
+ core/res/res/values/config.xml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/core/res/res/values/config.xml b/core/res/res/values/config.xml
+index d1fa97605157..bdaab4b6b54e 100644
+--- a/core/res/res/values/config.xml
++++ b/core/res/res/values/config.xml
+@@ -3623,12 +3623,12 @@
+     <string-array translatable="false" name="config_globalActionsList">
+         <item>emergency</item>
+         <item>lockdown</item>
+         <item>power</item>
+         <item>restart</item>
+-        <item>logout</item>
+-        <item>bugreport</item>
++        <item>airplane</item>
++        <item>silent</item>
+     </string-array>
+ 
+     <!-- Number of milliseconds to hold a wake lock to ensure that drawing is fully
+          flushed to the display while dozing.  This value needs to be large enough
+          to account for processing and rendering time plus a frame or two of latency
+-- 
+2.45.2
