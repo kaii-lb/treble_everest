@@ -1,15 +1,20 @@
 {
   "version": "v1.2.0 Lots of Fixes!",
-  "date": "1723070221",
+  "date": "1723807802",
   "variants": [
     {
       "name": "everest_arm64_bgN",
-      "size": "1690021828",
+      "size": "1690158936",
       "url": "https://github.com/kaii-lb/treble_manifest/releases/download/v1.2/EverestOS_1_3_arm64_bgN-FULL_GAPPS.img.xz"
     },
     {
       "name": "everest_arm64_bvN",
       "size": "1075327084",
+      "url": "https://github.com/kaii-lb/treble_manifest/releases/download/v1.2/EverestOS_1_3_arm64_bvN-NO_GAPPS.img.xz"
+    },
+    {
+      "name": "everest_arm64_bgPN",
+      "size": "1674492560",
       "url": "https://github.com/kaii-lb/treble_manifest/releases/download/v1.2/EverestOS_1_3_arm64_bvN-NO_GAPPS.img.xz"
     }
   ]

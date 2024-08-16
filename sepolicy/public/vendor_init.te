@@ -1,0 +1,1 @@
+allow vendor_init sf_hs_mode_prop:property_service set;

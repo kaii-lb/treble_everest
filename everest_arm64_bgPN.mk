@@ -13,8 +13,8 @@ PRODUCT_MODEL := EverestOS with GApps
 
 WITH_GAPPS := true
 
-TARGET_INCLUDE_LAUNCHER3 := true
-TARGET_INCLUDE_PIXEL_LAUNCHER := false
+TARGET_INCLUDE_LAUNCHER3 := false
+TARGET_INCLUDE_PIXEL_LAUNCHER := true
 TARGET_INCLUDE_LAWNCHAIR := false
 
 # Overwrite the inherited "emulator" characteristics
