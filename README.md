@@ -5,7 +5,7 @@ You'll need to get familiar with [Git and Repo](https://source.android.com/sourc
 Run the following:
 ```bash
 git clone https://github.com/cawilliamson/treble_voltage.git
-cd treble_everest/
+cd treble_voltage/
 ```
 
 ## Patch Script
