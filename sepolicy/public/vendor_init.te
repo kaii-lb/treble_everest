@@ -1,1 +1,3 @@
+type sf_hs_mode_prop, domain;
+
 allow vendor_init sf_hs_mode_prop:property_service set;

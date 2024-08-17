@@ -1,0 +1,8 @@
+type everestos_on_boot, domain;
+type everestos_on_boot_exec, exec_type, file_type;
+
+init_daemon_domain(everestos_on_boot)
+
+allow everestos_on_boot shell_exec:file rx_file_perms;
+allow everestos_on_boot toolbox_exec:file rx_file_perms;
+allow everestos_on_boot system_file:file rx_file_perms;

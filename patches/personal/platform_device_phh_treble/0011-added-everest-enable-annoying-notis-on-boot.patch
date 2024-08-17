@@ -39,8 +39,8 @@ index 0000000..3c901dc
 +
 +echo "PHH-EVEREST: Launched EverestOS on boot service"
 +
-+headsup="$(getprop persist.sys.phh.everest_annoying_notis)"
-+if [[ $headsup == "true" ]]; then
++annoyingNotis="$(getprop persist.sys.phh.everest_annoying_notis)"
++if [[ $annoyingNotis == "true" ]]; then
 +	echo "PHH-EVEREST: enabling annoying notifications..."
 +	settings put system notification_sound_vib_screen_on 0
 +	settings put system notification_sound_vib_screen_on 1
@@ -57,7 +57,7 @@ index beb639a..0bc47d2 100644
  /dev/smcinvoke u:object_r:smcinvoke_device:s0
  /system/bin/hw/android\.hardware\.bluetooth\.audio-service-system u:object_r:hal_audio_sysbta_exec:s0
 +
-+/system/bin/everestos-on-boot.sh u:object_r:init-everestos-on-boot:s0
++/system/bin/everestos-on-boot.sh u:object_r:everestos_on_boot_exec:s0
 diff --git a/vndk.rc b/vndk.rc
 index 6bd3950..0e07125 100644
 --- a/vndk.rc

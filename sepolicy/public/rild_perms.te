@@ -1,1 +1,3 @@
+type rild, domain;
+
 allow rild system_prop:file { read };

@@ -1,7 +1,0 @@
-type init-everestos-on-boot;
-type init-everestos-on-boot_exec;
-
-init_daemon_domain(init-everestos-on-boot)
-
-allow init-everestos-on-boot system_shell_exec:file rx_file_perms;
-allow init-everestos-on-boot system_toolbox_exec:file rx_file_perms;

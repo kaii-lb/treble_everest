@@ -1,3 +1,4 @@
-type prop_type;
+type prop_type, domain;
+type odrefresh, domain;
 
 dontaudit odrefresh prop_type:file r_file_perms;
