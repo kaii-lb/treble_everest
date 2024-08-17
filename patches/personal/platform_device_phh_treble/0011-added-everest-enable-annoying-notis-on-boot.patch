@@ -1,0 +1,87 @@
+From c23432248d2e046a193f959d1a48a06b77f10fdf Mon Sep 17 00:00:00 2001
+From: kaii <aosp@crave.io>
+Date: Sat, 17 Aug 2024 23:00:50 +0300
+Subject: [PATCH] added everestos on boot script
+
+---
+ base.mk                |  3 ++-
+ everestos-on-boot.sh   | 11 +++++++++++
+ sepolicy/file_contexts |  2 ++
+ vndk.rc                |  7 +++++++
+ 4 files changed, 22 insertions(+), 1 deletion(-)
+ create mode 100644 everestos-on-boot.sh
+
+diff --git a/base.mk b/base.mk
+index 43e261b..151e8ad 100644
+--- a/base.mk
++++ b/base.mk
+@@ -77,11 +77,12 @@ PRODUCT_COPY_FILES += \
+ 	device/phh/treble/phh-prop-handler.sh:system/bin/phh-prop-handler.sh \
+ 	device/phh/treble/fixSPL/getSPL.arm:system/bin/getSPL
+ 
+ PRODUCT_COPY_FILES += \
+ 	device/phh/treble/empty:system/phh/empty \
+-	device/phh/treble/phh-on-boot.sh:system/bin/phh-on-boot.sh
++	device/phh/treble/phh-on-boot.sh:system/bin/phh-on-boot.sh \
++	device/phh/treble/everestos-on-boot.sh:system/bin/everestos-on-boot.sh 
+ 
+ PRODUCT_PACKAGES += \
+ 	treble-environ-rc \
+ 
+ PRODUCT_PACKAGES += \
+diff --git a/everestos-on-boot.sh b/everestos-on-boot.sh
+new file mode 100644
+index 0000000..3c901dc
+--- /dev/null
++++ b/everestos-on-boot.sh
+@@ -0,0 +1,11 @@
++#!/bin/sh
++
++echo "PHH-EVEREST: Launched EverestOS on boot service"
++
++headsup="$(getprop persist.sys.phh.everest_annoying_notis)"
++if [[ $headsup == "true" ]]; then
++	echo "PHH-EVEREST: enabling annoying notifications..."
++	settings put system notification_sound_vib_screen_on 0
++	settings put system notification_sound_vib_screen_on 1
++fi
++
+diff --git a/sepolicy/file_contexts b/sepolicy/file_contexts
+index beb639a..0bc47d2 100644
+--- a/sepolicy/file_contexts
++++ b/sepolicy/file_contexts
+@@ -17,5 +17,7 @@
+ 
+ /efs u:object_r:efs_file:s0
+ 
+ /dev/smcinvoke u:object_r:smcinvoke_device:s0
+ /system/bin/hw/android\.hardware\.bluetooth\.audio-service-system u:object_r:hal_audio_sysbta_exec:s0
++
++/system/bin/everestos-on-boot.sh u:object_r:init-everestos-on-boot:s0
+diff --git a/vndk.rc b/vndk.rc
+index 6bd3950..0e07125 100644
+--- a/vndk.rc
++++ b/vndk.rc
+@@ -12,12 +12,19 @@ on early-boot
+ 
+ service phh_on_boot /system/bin/phh-on-boot.sh
+     oneshot
+     disabled
+ 
++service everestos_on_boot /system/bin/everestos-on-boot.sh
++	user root
++	group root system
++	disabled
++	oneshot
++
+ on property:sys.boot_completed=1
+     start phh_on_boot
++    start everestos_on_boot
+     chown wifi system /data/misc/wifi
+     chown system wifi /data/misc/wifi/hostapd.conf
+ 
+ on property:persist.sys.phh.mainkeys=*
+     setprop qemu.hw.mainkeys ${persist.sys.phh.mainkeys}
+-- 
+2.46.0
+
