@@ -17,6 +17,8 @@ TARGET_INCLUDE_LAUNCHER3 := true
 TARGET_INCLUDE_PIXEL_LAUNCHER := false
 TARGET_INCLUDE_LAWNCHAIR := false
 
+EVEREST_BUILD_TYPE := OFFICIAL
+
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device
 

@@ -9,13 +9,15 @@ PRODUCT_NAME := everest_arm64_bgN
 PRODUCT_DEVICE := tdgsi_arm64_ab
 PRODUCT_BRAND := google
 PRODUCT_SYSTEM_BRAND := google
-PRODUCT_MODEL := EverestOS with GApps
+PRODUCT_MODEL := EverestOS with Pixel GApps
 
 WITH_GAPPS := true
 
 TARGET_INCLUDE_LAUNCHER3 := false
 TARGET_INCLUDE_PIXEL_LAUNCHER := true
 TARGET_INCLUDE_LAWNCHAIR := false
+
+EVEREST_BUILD_TYPE := UNOFFICIAL
 
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device
