@@ -5,22 +5,24 @@ Subject: [PATCH 25/53] Allow disabling of fingerprint cleanups, needed on some
  Realme devices that cant enumerate
 
 ---
- .../biometrics/sensors/fingerprint/hidl/Fingerprint21.java      | 2 ++
- 1 file changed, 2 insertions(+)
+ .../biometrics/sensors/fingerprint/hidl/Fingerprint21.java    | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java b/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
-index 33e448bbe612..387693f2737d 100644
+index 5b94ad88e..a9a44b53e 100644
 --- a/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
 +++ b/services/core/java/com/android/server/biometrics/sensors/fingerprint/hidl/Fingerprint21.java
-@@ -1007,6 +1007,8 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
+@@ -1013,6 +1013,10 @@ public class Fingerprint21 implements IHwBinder.DeathRecipient, ServiceProvider
  
      private void scheduleInternalCleanup(int userId,
              @Nullable ClientMonitorCallback callback) {
-+	final boolean mNocleanup = android.os.SystemProperties.getBoolean("persist.sys.phh.fingerprint.nocleanup", false);
-+	if(mNocleanup) return;
-         mHandler.post(() -> {
-             scheduleUpdateActiveUserWithoutHandler(userId);
- 
++
++        // i don't think its necessary but incase
++		final boolean mNocleanup = android.os.SystemProperties.getBoolean("persist.sys.phh.fingerprint.nocleanup", false);
++		if(mNocleanup) return;
+         if (!mCleanup) {
+             return;
+         }
 -- 
-2.34.1
+2.45.2
 

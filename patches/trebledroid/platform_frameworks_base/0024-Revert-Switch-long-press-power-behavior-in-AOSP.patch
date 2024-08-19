@@ -16,8 +16,8 @@ index d1fa97605157..ca21d63362a0 100644
              1 - Mute toggle
              2 - Global actions menu
      -->
--    <integer name="config_keyChordPowerVolumeUp">1</integer>
-+    <integer name="config_keyChordPowerVolumeUp">2</integer>
+-    <integer name="config_keyChordPowerVolumeUp">2</integer>
++    <integer name="config_keyChordPowerVolumeUp">1</integer>
  
      <!-- Control the behavior when the user long presses the back button.  Non-zero values are only
           valid for watches as part of CDD/CTS.

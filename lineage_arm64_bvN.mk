@@ -2,7 +2,7 @@ TARGET_GAPPS_ARCH := arm64
 include build/make/target/product/aosp_arm64.mk
 $(call inherit-product, device/phh/treble/base.mk)
 
-$(call inherit-product, device/phh/treble/everest.mk)
+$(call inherit-product, device/phh/treble/lineage.mk)
 
 PRODUCT_NAME := everest_arm64_bvN
 PRODUCT_DEVICE := tdgsi_arm64_ab
@@ -12,11 +12,8 @@ PRODUCT_MODEL := EverestOS Vanilla
 
 WITH_GAPPS := false
 
-TARGET_INCLUDE_LAUNCHER3 := true
+TARGET_PREBUILT_PIXEL_LAUNCHER := false
 TARGET_INCLUDE_PIXEL_LAUNCHER := false
-TARGET_INCLUDE_LAWNCHAIR := false
-
-EVEREST_BUILD_TYPE := OFFICIAL
 
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device

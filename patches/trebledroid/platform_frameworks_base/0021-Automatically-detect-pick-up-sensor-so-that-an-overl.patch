@@ -5,14 +5,14 @@ Subject: [PATCH 21/53] Automatically detect pick up sensor, so that an overlay
  is required for the sole purpose of enabling pulse doze on pick up sensor
 
 ---
- .../display/AmbientDisplayConfiguration.java  | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+ .../display/AmbientDisplayConfiguration.java   | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/hardware/display/AmbientDisplayConfiguration.java b/core/java/android/hardware/display/AmbientDisplayConfiguration.java
-index 47541ca16cda..28168b9208f5 100644
+index 90245bc7e..919d8e973 100644
 --- a/core/java/android/hardware/display/AmbientDisplayConfiguration.java
 +++ b/core/java/android/hardware/display/AmbientDisplayConfiguration.java
-@@ -25,6 +25,9 @@ import android.text.TextUtils;
+@@ -28,6 +28,9 @@ import android.text.TextUtils;
  import android.util.ArrayMap;
  import android.util.SparseArray;
  
@@ -22,12 +22,11 @@ index 47541ca16cda..28168b9208f5 100644
  import com.android.internal.R;
  import com.android.internal.util.ArrayUtils;
  
-@@ -105,8 +108,20 @@ public class AmbientDisplayConfiguration {
+@@ -135,7 +138,20 @@ public class AmbientDisplayConfiguration {
  
      /** @hide */
      public boolean dozePickupSensorAvailable() {
 -        return mContext.getResources().getBoolean(R.bool.config_dozePulsePickup);
--    }
 +        SensorManager sm = mContext.getSystemService(SensorManager.class);
 +        boolean found = false;
 +        if(sm == null) {
@@ -41,10 +40,9 @@ index 47541ca16cda..28168b9208f5 100644
 +                }
 +            }
 +        }
-+        return mContext.getResources().getBoolean(R.bool.config_dozePulsePickup) || found;    }
++        return mContext.getResources().getBoolean(R.bool.config_dozePulsePickup) || found;    }       
+     }
  
-     /** @hide */
-     public boolean tapGestureEnabled(int user) {
+     /** {@hide} */
 -- 
-2.34.1
-
+2.45.2
