@@ -1,5 +1,5 @@
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
-$(call inherit-product, vendor/lineage/config/BoardConfigEverest.mk)
+$(call inherit-product, vendor/lineage/config/BoardConfigLineage.mk)
 $(call inherit-product, device/lineage/sepolicy/common/sepolicy.mk)
 include vendor/lineage/build/core/config.mk
 include build/make/target/product/aosp_arm64.mk
@@ -34,8 +34,6 @@ TARGET_HAS_UDFPS := true
 EXTRA_UDFPS_ANIMATIONS := true
 TARGET_INCLUDE_LAUNCHER3 := true
 TARGET_PREBUILT_LAWNCHAIR_LAUNCHER := true
-TARGET_PREBUILT_PIXEL_LAUNCHER := true
-TARGET_RELEASE := ap2a
 
 # SELinux
 SELINUX_IGNORE_NEVERALLOWS := true

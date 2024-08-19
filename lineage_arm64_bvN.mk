@@ -4,7 +4,7 @@ $(call inherit-product, device/phh/treble/base.mk)
 
 $(call inherit-product, device/phh/treble/lineage.mk)
 
-PRODUCT_NAME := everest_arm64_bvN
+PRODUCT_NAME := lineage_arm64_bvN
 PRODUCT_DEVICE := tdgsi_arm64_ab
 PRODUCT_BRAND := google
 PRODUCT_SYSTEM_BRAND := google
@@ -14,6 +14,7 @@ WITH_GAPPS := false
 
 TARGET_PREBUILT_PIXEL_LAUNCHER := false
 TARGET_INCLUDE_PIXEL_LAUNCHER := false
+TARGET_DEFAULT_PIXEL_LAUNCHER := false
 
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device
