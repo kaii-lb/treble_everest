@@ -17,6 +17,9 @@ if [[ $3 == "--reset" ]]; then
 	    echo directory is $p
 	    pushd $p &>/dev/null
 
+	    currHead=$(git show --oneline | head -n1)
+	    echo "current head is $currHead"
+
 		# heads=$(git show-ref)
 
 		# if echo $heads | tr ' ' "\n" | grep -e "remotes/everest" &>/dev/null;then
