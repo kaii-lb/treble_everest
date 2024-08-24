@@ -13,10 +13,6 @@ PRODUCT_MODEL := EverestOS with GApps
 
 # Gapps things
 WITH_GAPPS := true
-TARGET_SUPPORTS_QUICK_TAP := true
-TARGET_SUPPORTS_CALL_RECORDING := true
-TARGET_SUPPORTS_GOOGLE_BATTERY := true
-TARGET_SUPPORTS_ADPATIVE_CHARGING := true # spelled like this in vendor/google/gms/products/gms.mk
 
 TARGET_PREBUILT_PIXEL_LAUNCHER := true
 TARGET_DEFAULT_PIXEL_LAUNCHER := true
