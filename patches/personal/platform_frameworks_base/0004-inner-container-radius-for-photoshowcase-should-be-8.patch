@@ -1,0 +1,38 @@
+From 537299e9b8190fb79d40043f3729c822e257d7fa Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Sun, 25 Aug 2024 09:00:56 +0000
+Subject: [PATCH] inner container radius for photoshowcase should be 8dp less
+ than outer
+
+---
+ packages/SystemUI/res/values/everest_dimens.xml                 | 1 +
+ .../SystemUI/src/com/android/systemui/qs/PhotoShowcase.java     | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/packages/SystemUI/res/values/everest_dimens.xml b/packages/SystemUI/res/values/everest_dimens.xml
+index 099173be2..5dea3f437 100644
+--- a/packages/SystemUI/res/values/everest_dimens.xml
++++ b/packages/SystemUI/res/values/everest_dimens.xml
+@@ -28,6 +28,7 @@
+     <dimen name="qs_controls_margin_top">0dp</dimen>
+     <dimen name="qs_controls_margin_bottom">0dp</dimen>
+     <dimen name="qs_controls_container_radius">22dp</dimen>
++    <dimen name="qs_controls_inner_container_radius">14dp</dimen>
+     <dimen name="qs_controls_tile_size">24dp</dimen>
+     <dimen name="qs_controls_corner_radius">100dp</dimen>
+     <dimen name="qs_controls_corner_radius_full">100dp</dimen>
+diff --git a/packages/SystemUI/src/com/android/systemui/qs/PhotoShowcase.java b/packages/SystemUI/src/com/android/systemui/qs/PhotoShowcase.java
+index 7f63e9501..55cb2d599 100644
+--- a/packages/SystemUI/src/com/android/systemui/qs/PhotoShowcase.java
++++ b/packages/SystemUI/src/com/android/systemui/qs/PhotoShowcase.java
+@@ -65,7 +65,7 @@ public class PhotoShowcase extends ImageView {
+     }
+ 
+     private void init(Context context) {
+-        radius = context.getResources().getDimension(R.dimen.qs_controls_container_radius);
++        radius = context.getResources().getDimension(R.dimen.qs_controls_inner_container_radius);
+         path = new Path();
+         mContext = context;
+         mActivityLauncherUtils = new ActivityLauncherUtils(mContext);
+-- 
+2.45.2
