@@ -82,7 +82,7 @@ else
 	    for patch in $patches/patches/$tree/$project/*.patch; do
 	    	patch_number=$(echo $patch | cut -f1 -d'-' | rev | cut -f1 -d'/' | rev)
 	        if git am $patch; then
-	       	   echo "PATCH ${project} number $patch_number  SUCCEEDED!"
+	       	   echo "PATCH ${project} number $patch_number SUCCEEDED!"
 	       	   echo
 	       	else
 	       	   echo "PATCH ${project} number $patch_number FAILED, skipping..."
