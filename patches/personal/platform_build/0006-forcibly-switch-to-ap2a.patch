@@ -1,0 +1,23 @@
+From 7ff5be7f4662c47226f59ec1e7254d1d4b3d79d5 Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Tue, 3 Sep 2024 21:44:06 +0000
+Subject: [PATCH] forcibly switch to ap2a
+
+---
+ envsetup.sh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/envsetup.sh b/envsetup.sh
+index de568fc..c838b45 100644
+--- a/envsetup.sh
++++ b/envsetup.sh
+@@ -830,6 +830,7 @@ function lunch()
+         return 1
+     fi
+ 
++	release=ap2a
+     if ! check_product $product $release
+     then
+         # if we can't find a product, try to grab it off the LineageOS GitHub
+-- 
+2.45.2
