@@ -1,0 +1,31 @@
+From 12b0a7141a0872226ab183190a11b9821b005136 Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Wed, 4 Sep 2024 22:01:13 +0000
+Subject: [PATCH] workaround navView being possibly null
+
+---
+ .../android/settings/search/SearchFeatureProvider.java   | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/src/com/android/settings/search/SearchFeatureProvider.java b/src/com/android/settings/search/SearchFeatureProvider.java
+index 0420254..f12f726 100644
+--- a/src/com/android/settings/search/SearchFeatureProvider.java
++++ b/src/com/android/settings/search/SearchFeatureProvider.java
+@@ -99,9 +99,12 @@ public interface SearchFeatureProvider {
+         // Need to make the navigation icon non-clickable so that the entire card is clickable
+         // and goes to the search UI. Also set the background to null so there's no ripple.
+         final View navView = toolbar.findViewById(R.id.search_icon);
+-        navView.setClickable(false);
+-        navView.setFocusable(false);
+-        navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
++
++        if (navView != null) {    	
++	       navView.setClickable(false);
++	       navView.setFocusable(false);
++	       navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
++        }
+ 
+         final Context context = activity.getApplicationContext();
+         final Intent intent = buildSearchIntent(context, pageId)
+-- 
+2.45.2
