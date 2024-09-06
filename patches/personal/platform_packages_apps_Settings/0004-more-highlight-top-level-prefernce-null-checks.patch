@@ -1,0 +1,33 @@
+From 0776b335e4d260a900e2ed124cf26a3af6f66b89 Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Sat, 7 Sep 2024 23:11:28 +0000
+Subject: [PATCH] more highlight top level prefernce null checks
+
+---
+ .../HighlightableTopLevelPreferenceAdapter.java       | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java b/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java
+index a3c6054..7c00e07 100644
+--- a/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java
++++ b/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java
+@@ -246,8 +246,15 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
+     private void removeHighlightBackground(PreferenceViewHolder holder) {
+         final View v = holder.itemView;
+         v.setBackgroundResource(RES_NORMAL_BACKGROUND);
+-        ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorNormal);
+-        ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorNormal);
++
++        TextView titleViewWorkaround = ((TextView) v.findViewById(android.R.id.title));
++        TextView summaryViewWorkaround = ((TextView) v.findViewById(android.R.id.summary));
++
++        if (titleViewWorkaround != null && summaryViewWorkaround != null) {
++	      titleViewWorkaround.setTextColor(mTitleColorNormal);
++	      summaryViewWorkaround.setTextColor(mSummaryColorNormal);
++        }
++
+         final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
+         if (drawable != null) {
+             drawable.setTint(mIconColorNormal);
+-- 
+2.45.2

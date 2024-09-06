@@ -1,0 +1,14 @@
+diff --git a/overlay.mk b/overlay.mk
+index 2e74040..6b36ade 100644
+--- a/overlay.mk
++++ b/overlay.mk
+@@ -1,7 +1,6 @@
+ PRODUCT_PACKAGES += \
+ 	HardwareOverlayPicker \
+ 	QtiAudio \
+-	TrebleApp \
+ 	treble-overlay-Hisense-HLTE556N \
+ 	treble-overlay-NavBar \
+ 	treble-overlay-NightMode \
+-- 
+2.45.2

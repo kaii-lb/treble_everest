@@ -1,0 +1,24 @@
+From c3f55b40d61117daf0fa957a585edbbc278e44e8 Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Fri, 6 Sep 2024 16:53:29 +0000
+Subject: [PATCH] added category for basecamp
+
+---
+ AndroidManifest.xml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 0f59062..c081974 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -5322,6 +5322,8 @@
+             </intent-filter>
+             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                 android:value="com.everest.basecamp.BaseCamp" />
++			<meta-data android:name="com.android.settings.category" 
++				android:value="com.android.settings.category.ia.homepage"/>                
+         </activity>
+ 
+         <!-- Provide direct entry into Dev settings - Running Services -->
+-- 
+2.45.2
