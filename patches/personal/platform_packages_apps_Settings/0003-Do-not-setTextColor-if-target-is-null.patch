@@ -1,0 +1,47 @@
+From 982b3036bb6c4735feb527f60ea8f837229254a1 Mon Sep 17 00:00:00 2001
+From: ItsLynix <lynixthewolf@gmail.com>
+Date: Sun, 8 Sep 2024 12:44:24 -0400
+Subject: [PATCH] Do not setTextColor if target is null
+
+---
+ ...ighlightableTopLevelPreferenceAdapter.java | 25 +++++++++++++++----
+ 1 file changed, 20 insertions(+), 5 deletions(-)
+
+diff --git a/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java b/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java
+index a3c6054..65b4ab9 100644
+--- a/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java
++++ b/src/com/android/settings/widget/HighlightableTopLevelPreferenceAdapter.java
+@@ -246,11 +246,26 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
+     private void removeHighlightBackground(PreferenceViewHolder holder) {
+         final View v = holder.itemView;
+         v.setBackgroundResource(RES_NORMAL_BACKGROUND);
+-        ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorNormal);
+-        ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorNormal);
+-        final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
+-        if (drawable != null) {
+-            drawable.setTint(mIconColorNormal);
++        TextView titleView = v.findViewById(android.R.id.title);
++        if (titleView != null) {
++            titleView.setTextColor(mTitleColorNormal);
++        } else {
++            Log.w("removeHighlightBackground", "Title TextView is null");
++        }
++
++        TextView summaryView = v.findViewById(android.R.id.summary);
++        if (summaryView != null) {
++            summaryView.setTextColor(mSummaryColorNormal);
++        } else {
++            Log.w("removeHighlightBackground", "Summary TextView is null");
++        }
++
++        ImageView iconView = v.findViewById(android.R.id.icon);
++        if (iconView != null) {
++            Drawable drawable = iconView.getDrawable();
++            if (drawable != null) {
++                drawable.setTint(mIconColorNormal);
++            }
+         }
+     }
+ 
+-- 
+2.39.2
