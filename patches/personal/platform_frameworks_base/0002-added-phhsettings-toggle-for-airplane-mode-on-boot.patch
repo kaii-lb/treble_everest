@@ -1,0 +1,41 @@
+From 72d3bcffe84479c6c669b9f050b5cc624ee8dae9 Mon Sep 17 00:00:00 2001
+From: kaii-lb <aosp@crave.io>
+Date: Fri, 20 Sep 2024 14:28:14 +0000
+Subject: [PATCH] added phhsettings toggle for airplane mode on boot
+
+Change-Id: I81486e4347c4e2d5da1858a327d36f95986fa826
+---
+ services/core/java/rising/server/NetworkOptimizer.java | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/services/core/java/rising/server/NetworkOptimizer.java b/services/core/java/rising/server/NetworkOptimizer.java
+index 53d8fc7d..250a01dc 100644
+--- a/services/core/java/rising/server/NetworkOptimizer.java
++++ b/services/core/java/rising/server/NetworkOptimizer.java
+@@ -20,6 +20,7 @@ import android.content.Intent;
+ import android.content.IntentFilter;
+ import android.content.BroadcastReceiver;
+ import android.os.Handler;
++import android.os.SystemProperties;
+ import android.provider.Settings;
+ import com.android.server.SystemService;
+ 
+@@ -53,12 +54,15 @@ public final class NetworkOptimizerService extends SystemService {
+             }
+         }
+     }
+-    
++
+     private boolean isAirplaneModeOn() {
+         return Settings.Global.getInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
+     }
+ 
+     private void toggleAirplaneModeOnAndOff() {
++	boolean shouldDisable = SystemProperties.getBoolean("persist.sys.phh.everest_airplane_mode", false);
++	if (shouldDisable) return;
++
+         setAirplaneMode(true);
+         handler.postDelayed(() -> setAirplaneMode(false), TOGGLE_DELAY_MS);
+     }
+-- 
+2.45.2
